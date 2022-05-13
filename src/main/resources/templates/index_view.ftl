@@ -16,7 +16,8 @@
         <div style="padding-left: 5px; width: 600px; height: 60px">
             <!-- 在这里替换具体的LOGO和标语 -->
             <img width="120px" src="static/images/logos/diandian-logo.png" style="float: left; margin-top: 7px">
-            <div style="margin-left:20px;float:left;width:300px;height:100%;line-height:60px;text-align:left;color:#009688;font-size:16px;">SpringBoot+LayUI后台管理系统</div>
+            <div style="margin-left:20px;float:left;width:300px;height:100%;line-height:60px;text-align:left;color:#009688;font-size:16px;">员工后台管理系统</div>
+            <#--<div style="margin-left:20px;float:left;width:300px;height:100%;line-height:60px;text-align:left;color:#009688;font-size:16px;">SpringBoot+LayUI后台管理系统</div>-->
         </div>
 
         <ul class="layui-nav layui-layout-right">
@@ -25,9 +26,10 @@
                     <img src="static/images/icons/diandian-icon.png" class="layui-nav-img">
                     ${(user.username)!"未登陆"}
                 </a>
-                <dl class="layui-nav-child">
+                <#--无前端页面 不实现了-->
+   <#--             <dl class="layui-nav-child">
                     <dd><a href="">更改密码</a></dd>
-                </dl>
+                </dl>-->
             </li>
             <li class="layui-nav-item"><a id="logout-a" href="/">注销</a></li>
         </ul>
