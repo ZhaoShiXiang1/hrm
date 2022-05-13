@@ -8,6 +8,7 @@
 </head>
 <body>
 
+<#--更改内容展开页面-->
 
 <script type="text/html" id="file-update">
     <form class="layui-form">
@@ -40,6 +41,8 @@
             </div>
         </div>
     </form>
+</script>
+<#--文件上传展开页面-->
 
 </script>
 
@@ -78,12 +81,14 @@
 </script>
 
 <table class="layui-hide" id="file-table" lay-filter="file-table"></table>
+<#--上传文件按钮-->
 
 <script type="text/html" id="toolbar">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm" lay-event="addFile">上传文件</button>
     </div>
 </script>
+<#--显示右侧信息-->
 
 <script type="text/html" id="barTpl">
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
@@ -91,6 +96,7 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
+<#--原页面数据展示代码-->
 <script>
     var realUUIDname = "";
     var originalFilename = "";
@@ -100,7 +106,7 @@
 
         table.render({
             elem: '#file-table',
-            url:'/files/',
+            url:'/files/list',
             toolbar: '#toolbar',
             parseData: function (res) {
                 console.log(res);
@@ -117,13 +123,13 @@
                 {field:'description', width:300, title:'描述', edit: true},
                 {field:'username', width:150, title: '创建者'},
                 {field:'createdTime', width:180, title: '创建时间', sort: true},
-                {field:'filename', width: 120, title: 'sdfsd', hide: true},
+                {field:'filename', width: 120, title: '文件名称', hide: true},
                 {fixed: 'right', width:180, align:'center', toolbar: '#barTpl'}
             ]]
             ,page: true
         });
 
-
+        //附件上传和修改
         onUpdateFile = function (obj) {
             var file = obj.files[0];
             console.log(file);
@@ -156,6 +162,7 @@
                 }
             });
         },
+        //    上传附件
         onChangeFile = function (obj) {
             var file = obj.files[0];
             console.log(file);
@@ -274,7 +281,7 @@
 
 
 
-        //监听工具条(右侧)
+        //监听工具条上传文件(右侧)
         table.on('tool(file-table)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
@@ -351,6 +358,5 @@
 
     });
 </script>
-
 </body>
 </html>
