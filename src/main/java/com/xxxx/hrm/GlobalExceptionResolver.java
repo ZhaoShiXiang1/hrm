@@ -33,7 +33,7 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
         if (ex instanceof NoLoginException){
             NoLoginException nx = (NoLoginException)ex;
             //mv.setViewName("index"); 错误 默认访问静态资源  但是ftl需要通过接口进行访问
-            mv.setViewName("redirect:/user/login");
+            mv.setViewName("redirect:login");
             return mv;
         }
 
