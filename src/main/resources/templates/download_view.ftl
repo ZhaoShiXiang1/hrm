@@ -90,7 +90,7 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
-<#--触发代码-->
+<#--原页面数据展示代码-->
 <script>
     var realUUIDname = "";
     var originalFilename = "";
@@ -123,7 +123,7 @@
             ,page: true
         });
 
-//附件上传和修改
+        //附件上传和修改
         onUpdateFile = function (obj) {
             var file = obj.files[0];
             console.log(file);
@@ -352,6 +352,5 @@
 
     });
 </script>
-
 </body>
 </html>
