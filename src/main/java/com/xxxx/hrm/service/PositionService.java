@@ -12,4 +12,8 @@ public class PositionService extends BaseService<Position,Integer> {
 
     @Resource
     private PositionMapper positionMapper;
+
+    public void addPosition(Position position){
+
+    }
 }

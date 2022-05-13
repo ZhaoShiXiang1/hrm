@@ -80,5 +80,12 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <!--职位管理添加职位-->
+  <insert id="insertPosition" parameterType="com.xxxx.hrm.vo.Position" >
+    insert into position (id, name, description,
+                          created_time)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+            #{createdTime,jdbcType=TIMESTAMP})
+  </insert>
 
 </mapper>
