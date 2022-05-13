@@ -70,9 +70,11 @@
 
         $("#logout-a").click(function () {
             $.ajax({
-                url: '/auths/logout',
-                success: function (res) {
-                    window.location.href = "/login";
+                url: '/user_auth/logout',
+                success: function (data) {
+                    if (data.code == 200){
+                        window.location.href = "/login";
+                    }
                 }
             });
         });

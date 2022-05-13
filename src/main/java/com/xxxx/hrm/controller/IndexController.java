@@ -21,14 +21,4 @@ public class IndexController extends BaseController {
     }
 
 
-    @RequestMapping("auth_view")
-    public String auth_view(){
-        return "auth_view";
-    }
-
-    @RequestMapping("index_view")
-    public String index_view(){
-        return "index_view";
-    }
-
 }
