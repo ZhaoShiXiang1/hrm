@@ -15,16 +15,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-/*
+
 @Component
 public class GlobalExceptionResolver implements HandlerExceptionResolver {
-
-    */
-/**
+/*
+*
      * 控制层的方法返回的内容两种情况
      * 1. 视图:视图异常
      * 2. Json:方法执行错误 返回错误json信息
-     *//*
+     */
 
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
@@ -34,10 +33,9 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
         if (ex instanceof NoLoginException){
             NoLoginException nx = (NoLoginException)ex;
             //mv.setViewName("index"); 错误 默认访问静态资源  但是ftl需要通过接口进行访问
-            mv.setViewName("redirect:/index");
+            mv.setViewName("redirect:/user/login");
             return mv;
         }
-
 
         mv.setViewName("error");
         mv.addObject("code", 300);
@@ -93,4 +91,4 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
         }
         return mv;
     }
-}*/
+}

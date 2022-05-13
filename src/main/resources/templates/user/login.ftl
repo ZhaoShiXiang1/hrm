@@ -46,11 +46,13 @@
                 success: function (data) {
                     console.log(data);
                     if (data.code == 200) {
+                        //登陆成功跳转
                         parent.window.location.href = "/index";
                     } else {
-                        parent.window.location.href = "/login";
+                        //登录失败弹出错误信息
+                        layui.layer.msg(data.msg, {icon: 5})
+                        //parent.window.location.href = "/login";
                     }
-                    //parent.window.location.href = "/";
                 }
             });
         });
@@ -58,8 +60,9 @@
     }
     $(document).ready(function () {
         $("#reset").click(function () {
-            $("input[name='username']").val("");
-            $("input[name='password']").val("");
+            //重置
+            $("#username").val("");
+            $("#password").val("");
         });
         $("#login").click(function () {
             doLogin();
