@@ -8,14 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController extends BaseController {
 
-    @RequestMapping("index")
+    //跳转登录页面
+    @RequestMapping("login")
     public String index(){
         return "user/login";
     }
 
-    @RequestMapping("register")
+    //登录成功跳转到后台界面
+    @RequestMapping("index")
     public String register(){
-        return "user/register";
+        return "index_view";
     }
 
 

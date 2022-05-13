@@ -90,4 +90,11 @@
       created_time = #{createdTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <!--根据用户名查询用户-->
+  <select id="queryUserByName" parameterType="string" resultType="com.xxxx.hrm.vo.UserAuth">
+    select * from userauth where username = #{username}
+  </select>
+
 </mapper>

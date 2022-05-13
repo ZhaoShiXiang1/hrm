@@ -37,15 +37,15 @@
                 return false;
             }
             $.ajax({
-                url: '/auths/login',
+                url: '/user_auth/login',
                 method: 'post',
                 data: {
                     username: username,
                     password: password
                 },
-                success: function (res) {
-                    console.log(res);
-                    if (res.code == 200) {
+                success: function (data) {
+                    console.log(data);
+                    if (data.code == 200) {
                         parent.window.location.href = "/index";
                     } else {
                         parent.window.location.href = "/login";
@@ -94,7 +94,6 @@
                         <dd><a href="">更改密码</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="http://diandian2.cn">点点OJ</a></li>
             </ul>
         </div>
     </div>
