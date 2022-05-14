@@ -45,7 +45,7 @@
 
         table.render({
             elem: '#dept-table',
-            url:'/depts',
+            url:'/dep/list',
             toolbar: '#toolbar',
             parseData: function (res) {
                 console.log(res);

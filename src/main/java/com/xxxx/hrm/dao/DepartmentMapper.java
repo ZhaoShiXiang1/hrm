@@ -1,6 +1,7 @@
 package com.xxxx.hrm.dao;
 
 import com.xxxx.hrm.base.BaseMapper;
+import com.xxxx.hrm.query.DepartmentQuery;
 import com.xxxx.hrm.vo.Department;
 
 import java.util.List;
@@ -9,6 +10,9 @@ import java.util.List;
 public interface DepartmentMapper extends BaseMapper<Department,Integer> {
 
     //查询所有
-    List<Department> queryAll();
+     public List<Department> queryAll(DepartmentQuery departmentQuery);
+
+    //查询所有
+
 
 }
