@@ -1,13 +1,19 @@
 package com.xxxx.hrm.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xxxx.hrm.base.BaseService;
 import com.xxxx.hrm.dao.UserAuthMapper;
+import com.xxxx.hrm.query.UserAuthQuery;
 import com.xxxx.hrm.utils.AssertUtil;
 import com.xxxx.hrm.vo.UserAuth;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserAuthService extends BaseService<UserAuth,Integer> {
@@ -29,5 +35,22 @@ public class UserAuthService extends BaseService<UserAuth,Integer> {
 
         //登陆成功，将userAuth对象返回给Controller层
         return dbUserAuth;
+    }
+
+    /*
+     * 多条件查询数据
+     */
+    public Map<String, Object> queryAllUserAuths(UserAuthQuery query) {
+        Map<String, Object> map = new HashMap<>();
+        //开启分页
+        PageHelper.startPage(query.getPage(), query.getLimit());
+        List<UserAuth> userAuths = userAuthMapper.queryAllUserAuths(query);
+        //按照分页条件，格式化数据
+        PageInfo<UserAuth> userAuthsPageInfo = new PageInfo<>(userAuths);
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count", userAuthsPageInfo.getTotal());
+        map.put("data", userAuthsPageInfo.getList());
+        return map;
     }
 }

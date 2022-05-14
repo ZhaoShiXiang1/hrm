@@ -2,6 +2,7 @@ package com.xxxx.hrm.controller;
 
 import com.xxxx.hrm.base.BaseController;
 import com.xxxx.hrm.base.ResultInfo;
+import com.xxxx.hrm.query.UserAuthQuery;
 import com.xxxx.hrm.service.UserAuthService;
 import com.xxxx.hrm.utils.AssertUtil;
 import com.xxxx.hrm.vo.UserAuth;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.transform.Result;
+import java.util.Map;
 
 @Controller
 @RequestMapping("user_auth")
@@ -46,5 +48,19 @@ public class UserAuthController extends BaseController {
             request.getSession().removeAttribute("user");
         }
         return success();
+    }
+    /*
+     * 多条件分页查询数据
+     */
+    @RequestMapping("list")
+    @ResponseBody
+    public Map<String, Object> queryAllUserAuths(UserAuthQuery query) {
+        return userAuthService.queryAllUserAuths(query);
+    }
+
+    //点击授权管理，页面展示
+    @RequestMapping("auth")
+    public String auth_view(){
+        return "auth_view";
     }
 }
