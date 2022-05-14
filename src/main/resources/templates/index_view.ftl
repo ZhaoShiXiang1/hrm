@@ -26,7 +26,7 @@
                     <img src="static/images/icons/diandian-icon.png" class="layui-nav-img">
                     ${(user.username)!"未登陆"}
                 </a>
-                <#--无前端页面 不实现了-->
+                <#--常坤：无前端页面 不实现了-->
    <#--             <dl class="layui-nav-child">
                     <dd><a href="">更改密码</a></dd>
                 </dl>-->
@@ -40,7 +40,7 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <li class="layui-nav-item layui-this"><a href="/user_auth/auth" target="admin-list">权限管理</a></li>
-                <li class="layui-nav-item"><a href="/department" target="admin-list">部门管理</a></li>
+                <li class="layui-nav-item"><a href="/dep/management" target="admin-list">部门管理</a></li>
                 <li class="layui-nav-item"><a href="/position" target="admin-list">职位管理</a></li>
                 <li class="layui-nav-item"><a href="/employee" target="admin-list">员工管理</a></li>
                 <li class="layui-nav-item"><a href="/post/index" target="admin-list">公告管理</a></li>
@@ -52,7 +52,7 @@
     <div class="layui-body">
         <!-- 内容主体区域 - 局部刷新, 使用iframe进行实现 -->
         <div style="padding: 15px; width: 100%; height: 100%">
-            <iframe style="width: 100%; height: 100%;" name="admin-list" scrolling="no" src="/auth" frameborder="0"></iframe>
+            <iframe style="width: 100%; height: 100%;" name="admin-list" scrolling="no" src="/user_auth/auth" frameborder="0"></iframe>
         </div>
     </div>
 </div>

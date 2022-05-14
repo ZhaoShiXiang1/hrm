@@ -55,4 +55,15 @@ public class UserAuth {
     public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
     }
+
+    @Override
+    public String toString() {
+        return "UserAuth{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", isAdmin=" + isAdmin +
+                ", createdTime=" + createdTime +
+                '}';
+    }
 }
