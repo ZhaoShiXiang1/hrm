@@ -6,6 +6,11 @@ import com.xxxx.hrm.query.FileUpLoadQuery;
 import com.xxxx.hrm.service.FileUpLoadService;
 import com.xxxx.hrm.vo.FileUpLoad;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -100,4 +105,29 @@ public class FileUpLoadController extends BaseController {
         map.put("msg","数据查询成功");
         return map;
     }
+
+    //实现文件下载(文件名/数组长度/IO流)
+    @RequestMapping("/downloadFile")
+    public ResponseEntity<InputStreamResource> downloadFile(Integer id) throws IOException {
+        //文件绝对路径
+        String filepath = fileUpLoadService.selectByPrimaryKey(id).getPath();
+        //根据绝对路径创建一个文件对象
+        FileSystemResource file = new FileSystemResource(filepath);
+        //将数据封装到请求头
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        //需要一个文件名
+        headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getFilename()));//获取文件名加后缀
+        headers.add("Pragma", "no-cache");
+        headers.add("Expires", "0");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)//加入该对象
+                .contentLength(file.contentLength())//内容字符数组线长度
+                .contentType(MediaType.parseMediaType("application/octet-stream"))//字符
+                .body(new InputStreamResource(file.getInputStream()));//放入一个流I/O
+
+    }
+
 }

@@ -360,10 +360,9 @@
             } else if(layEvent === 'download'){ //下载文件
                 // 文件下载
                 console.log(data.id);
-                window.location.href = "/files/download/" + data.id;
+                window.location.href = "/files/downloadFile?id=" + data.id;
             }
         });
-
     });
 </script>
 </body>
