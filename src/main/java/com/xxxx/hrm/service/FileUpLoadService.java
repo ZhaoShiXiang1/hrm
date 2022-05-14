@@ -27,12 +27,12 @@ public class FileUpLoadService extends BaseService<FileUpLoad,Integer> {
         //使用方法查询数据，返回数组
         List<FileUpLoad> files = fileUpLoadMapper.selectFilesAll(query);
         //按照分页条件，格式化数据，展示第一页的数据
-        PageInfo<FileUpLoad> userPageInfo = new PageInfo<>(files);
+        PageInfo<FileUpLoad> filePageInfo = new PageInfo<>(files);
         //创建键值对
         map.put("code",200);
         map.put("msg","数据查询成功");
-        map.put("size",userPageInfo.getTotal());
-        map.put("data",userPageInfo.getList());
+        map.put("size",filePageInfo.getTotal());
+        map.put("data",filePageInfo.getList());
         return map;
     }
 }

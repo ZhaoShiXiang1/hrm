@@ -33,10 +33,4 @@ public class FileUpLoadController extends BaseController {
         return fileUpLoadService.selectFilesAll(query);
     }
 
-
-    //触发前台页面跳转至下载中心
-    @RequestMapping("/index")
-    public String index1(){
-        return "employee_view";
-    }
 }
