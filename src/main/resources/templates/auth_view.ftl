@@ -137,40 +137,40 @@
             });
 
             //监听工具条(右侧)
-            table.on('tool(auth-table)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
-                var data = obj.data; //获得当前行数据
-                var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-                var tr = obj.tr; //获得当前行 tr 的DOM对象
-
-                if (layEvent === 'del') { //触发删除
-                    layer.confirm('删除用户' + data.username + '?', {
-                        skin: 'layui-layer-molv',
-                        offset: 'c',
-                        icon: '0'
-                    }, function (index) {
-                        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-                        layer.close(index);
-                        //向服务端发送删除指令
-                        $.ajax({
-                            url: '/auths/' + data.id,
-                            type: 'delete',
-                            success: function (res) {
-                                console.log(res);
-                                if (res.code == 200) {
-                                    layer.msg('删除成功', {icon: 1, skin: 'layui-layer-molv', offset: 'c'});
-                                } else {
-                                    layer.msg('删除失败', {icon: 2, skin: 'layui-layer-molv', offset: 'c'});
-                                }
-                            }
-                        })
-                    });
-                }
-            });
+            //监听删除按钮
+            // table.on('tool(auth-table)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            //     var data = obj.data; //获得当前行数据
+            //     var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            //     var tr = obj.tr; //获得当前行 tr 的DOM对象
+            //
+            //     if (layEvent === 'del') { //触发删除
+            //         console.log('/user_auth/delete' + data.id)
+            //         console.log(obj);
+            //         layer.confirm('删除用户' + data.username + '?', {
+            //             skin: 'layui-layer-molv',
+            //             offset: 'c',
+            //             icon: '0'
+            //         }, function (index) {
+            //             obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+            //             layer.close(index);
+            //             //向服务端发送删除指令
+            //             $.ajax({
+            //                 url: '/user_auth/delete' + data.id,
+            //                 success: function (res) {
+            //                     console.log(res);
+            //                     if (res.code == 200) {
+            //                         layer.msg('删除成功', {icon: 1, skin: 'layui-layer-molv', offset: 'c'});
+            //                     } else {
+            //                         layer.msg('删除失败', {icon: 2, skin: 'layui-layer-molv', offset: 'c'});
+            //                     }
+            //                 }
+            //             })
+            //         });
+            //     }
+            // });
             /*右侧工具栏监听*/
             //右侧编辑按钮监听
             table.on('tool(auth-table)', function (obj) {
-                console.log("第1次打印");
-                console.log(obj);
                 var data = obj.data; //获得当前行数据
                 var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                 var tr = obj.tr; //获得当前行 tr 的DOM对象
@@ -178,8 +178,6 @@
                 var layerCallback;
                 switch (obj.event) {
                     case 'edit':
-                        console.log("第2次打印");
-                        console.log(obj);
                         layerCallback = function (callbackData) {
                             // 执行局部刷新, 获取之前的TABLE内容, 再进行填充
                             var dataBak = [];
@@ -198,6 +196,28 @@
                             type: 2,
                             offset: 'c',
                             area: ["500px", "350px"]
+                        });
+                        break;
+                    case 'del':
+                        layer.confirm('删除用户' + data.username + '?', {
+                            skin: 'layui-layer-molv',
+                            offset: 'c',
+                            icon: '0'
+                        }, function (index) {
+                            obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                            layer.close(index);
+                            //向服务端发送删除指令
+                            $.ajax({
+                                url: '/user_auth/delete?id=' + data.id,
+                                success: function (res) {
+                                    console.log(res);
+                                    if (res.code == 200) {
+                                        layer.msg('删除成功', {icon: 1, skin: 'layui-layer-molv', offset: 'c'});
+                                    } else {
+                                        layer.msg('删除失败', {icon: 2, skin: 'layui-layer-molv', offset: 'c'});
+                                    }
+                                }
+                            })
                         });
                         break;
                 }

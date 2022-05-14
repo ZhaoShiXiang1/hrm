@@ -91,4 +91,11 @@ public class UserAuthService extends BaseService<UserAuth, Integer> {
         //执行修改操作
         AssertUtil.isTrue(userAuthMapper.updateByPrimaryKeySelective(userAuth) < 1, "用户数据修改失败");
     }
+
+    //删除
+    public void delete(Integer id) {
+        UserAuth userAuth = userAuthMapper.selectByPrimaryKey(id);
+        AssertUtil.isTrue(id == null || null == userAuth,"待删除计划项不存在");
+        AssertUtil.isTrue(userAuthMapper.deleteByPrimaryKey(id) < 1,"计划项删除失败");
+    }
 }
