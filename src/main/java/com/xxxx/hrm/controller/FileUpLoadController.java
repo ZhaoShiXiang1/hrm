@@ -64,7 +64,7 @@ public class FileUpLoadController extends BaseController {
     }
 
     // 文件上传(传入一个文件（原来的路径和文件名），复制到本地，传出一个结果：文件名，状态码 msg )
-    @RequestMapping (value="upload" ,produces = "text/plain;charset=UTF-8")
+    @RequestMapping ("/upload")
     @ResponseBody
     public Map<Object,Object> uploadFile(MultipartFile file) throws IOException {
         //获取文件名称
@@ -72,7 +72,8 @@ public class FileUpLoadController extends BaseController {
 
         //将内容转换成数组写出
         byte[] arr = file.getBytes();
-        FileOutputStream out = new FileOutputStream(new File(filePath + name));
+        FileOutputStream out = new FileOutputStream(new File(filePath+name));
+        System.out.println(new File(filePath+name));
         out.write(arr);
         out.flush();
         out.close();
@@ -84,5 +85,4 @@ public class FileUpLoadController extends BaseController {
         System.out.println("-----------------------");
         return map;
     }
-
 }

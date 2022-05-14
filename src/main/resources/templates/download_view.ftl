@@ -93,7 +93,9 @@
 
 <#--原页面数据展示代码-->
 <script>
+    //上传后文件暂存的地址
     var realUUIDname = "";
+    //上传后的文件名
     var originalFilename = "";
     layui.use('table', function(){
 
@@ -181,9 +183,11 @@
                         console.log("res.code == 200");
                         // 添加到列表中
                         $("#file-list").text(file.name);
+                        //原文件名
                         originalFilename = file.name;
+                        //加密的文件名
                         realUUIDname = res.data;
-                        console.log("mingzi");
+                        console.log("上传附件后打印名字");
                         console.log(originalFilename);
                         console.log(realUUIDname);
                         layer.tips('附件上传成功', '#file-list', {
@@ -242,7 +246,7 @@
                                     data: {
                                         title: title,
                                         description: description,
-                                        path: realUUIDname,
+                                        path: 'D:/hrm-upload/'+realUUIDname,
                                         filename: originalFilename,
                                         username: username,
                                         createdTime: nowDate
