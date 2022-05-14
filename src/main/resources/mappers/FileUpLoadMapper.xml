@@ -119,4 +119,8 @@
     select id, title, description, filename, path, username, created_time createdTime from fileupload
   </select>
 
+  <delete id="deleteFilesById" parameterType="int" >
+    delete from fileupload where id =#{id}
+  </delete>
+
 </mapper>
