@@ -104,4 +104,12 @@
       created_time = #{createdTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!--查询所有数据-->
+  <select id="selectPostAll" resultType="com.xxxx.hrm.vo.Post" >
+    select * from post
+  </select>
+
+  <delete id="deletePostById" parameterType="int" >
+    delete from Post where id =#{id}
+  </delete>
 </mapper>
