@@ -9,6 +9,7 @@ import com.xxxx.hrm.vo.FileUpLoad;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,5 +41,10 @@ public class FileUpLoadService extends BaseService<FileUpLoad,Integer> {
     public Integer deleteFilesById(Integer id){
      return  fileUpLoadMapper.deleteFilesById(id);
     }
+
+    //添加文件
+   public Integer add(FileUpLoad file){
+      return  fileUpLoadMapper.insertSelective(file);
+   }
 }
 

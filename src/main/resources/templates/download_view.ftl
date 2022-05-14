@@ -67,6 +67,7 @@
                         <span class="layui-form-mid" id="file-list"></span>
                         <div class="layui-input-block">
                             <input type="file" style="visibility: hidden" onchange="onChangeFile(this);" name="file" >
+<#--                            <a href="#"  name="file" style="visibility: hidden" onchange="onChangeFile(this)">登录</a>-->
                         </div>
                     </div>
                 </form>
@@ -123,7 +124,7 @@
             ,page: true
         });
 
-        //附件上传和修改
+        //附件更改附件
         onUpdateFile = function (obj) {
             var file = obj.files[0];
             console.log(file);
@@ -156,16 +157,19 @@
                 }
             });
         },
-        //    上传附件
+        //    上传附件方法
         onChangeFile = function (obj) {
+            //获取文件信息
             var file = obj.files[0];
             console.log(file);
             var relativePath = 'work/' + $("select[name='class']").val();
+            console.log("relativePath");
+            console.log(relativePath);
             var formData = new FormData();
             formData.append("file", file);
             formData.append("relativePath", relativePath);
             $.ajax({
-                url: '/files/upload/',
+                url: 'upload',
                 method: 'post',
                 data: formData,
                 async: false,
@@ -173,12 +177,15 @@
                 processData:false,
                 contentType:false,
                 success:function(res) {
-                    console.log(res);
                     if (res.code == 200) {
+                        console.log("res.code == 200");
                         // 添加到列表中
                         $("#file-list").text(file.name);
                         originalFilename = file.name;
                         realUUIDname = res.data;
+                        console.log("mingzi");
+                        console.log(originalFilename);
+                        console.log(realUUIDname);
                         layer.tips('附件上传成功', '#file-list', {
                             tipsMore: true
                         });
@@ -230,7 +237,7 @@
                                 var empId = "${(user.id)!''}";
                                 var username = "${(user.username)!'test'}";
                                 $.ajax({
-                                    url: '/files',
+                                    url: '/files/add',
                                     method: 'post',
                                     data: {
                                         title: title,
