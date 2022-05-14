@@ -119,8 +119,10 @@
     select id, title, description, filename, path, username, created_time createdTime from fileupload
   </select>
 
+<!--  根据ID删除文件-->
   <delete id="deleteFilesById" parameterType="int" >
     delete from fileupload where id =#{id}
   </delete>
+
 
 </mapper>
