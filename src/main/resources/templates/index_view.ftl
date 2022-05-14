@@ -52,7 +52,7 @@
     <div class="layui-body">
         <!-- 内容主体区域 - 局部刷新, 使用iframe进行实现 -->
         <div style="padding: 15px; width: 100%; height: 100%">
-            <iframe style="width: 100%; height: 100%;" name="admin-list" scrolling="no" src="/auth" frameborder="0"></iframe>
+            <iframe style="width: 100%; height: 100%;" name="admin-list" scrolling="no" src="/user_auth/auth" frameborder="0"></iframe>
         </div>
     </div>
 </div>

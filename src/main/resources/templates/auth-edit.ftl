@@ -13,20 +13,25 @@
     <div class="layui-form-item" style="padding-right: 50px; width: 300px; margin: 0 auto; margin-top: 15px">
         <label class="layui-form-label">登录名</label>
         <div class="layui-input-block">
-            <input id="auth-username" type="text" name="title" required  lay-verify="required" placeholder="请输入登录名" autocomplete="off" class="layui-input">
+            <input id="auth-username" type="text" name="title" required  lay-verify="required" placeholder="请输入登录名" autocomplete="off" class="layui-input" value="${(userAuth.username)!""}">
         </div>
     </div>
     <div class="layui-form-item" style="padding-right: 50px; width: 300px; margin: 0 auto; margin-top: 15px ">
         <label class="layui-form-label">密码</label>
         <div class="layui-input-block">
-            <input id="auth-password" type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+            <input id="auth-password" type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="${(userAuth.password)!""}">
         </div>
     </div>
     <div class="layui-form-item" style="padding-right: 50px; width: 300px; margin: 0 auto; margin-top: 15px ">
         <label class="layui-form-label">管理员</label>
         <div class="layui-input-block">
-            <input id="auth-isAdmin" type="checkbox" lay-filter="insert_switch" lay-skin="switch" name="close" lay-text="是|否" checked>
+            <input id="auth-isAdmin" type="checkbox" lay-filter="insert_switch" lay-skin="switch" name="close" lay-text="是|否" <#if userAuth.isAdmin == true>checked</#if>>
         </div>
+       <#-- <div class="layui-input-block">
+            <#if userAuth.isAdmin??><p>测试1</p></#if>
+            <#if userAuth.isAdmin==true><p>测试2</p></#if>
+            <#if userAuth.isAdmin!=ture><p>测试3</p></#if>
+        </div>-->
     </div>
 
     <div class="layui-form-item" style="padding-right: 40px; width: 300px; margin: 0 auto; margin-top: 40px">
@@ -68,6 +73,8 @@
                         var index = parent.layer.getFrameIndex(window.name);
                         parent.layer.close(index);
                         //刷新父页面，将添加的新数据展示
+                        //window.location.href = "/user_auth/auth";
+                        //location.reload();
                         parent.location.reload();
                     } else {
                         parent.layer.msg('用户修改失败', {icon: 2});

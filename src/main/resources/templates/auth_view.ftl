@@ -169,6 +169,8 @@
             /*右侧工具栏监听*/
             //右侧编辑按钮监听
             table.on('tool(auth-table)', function (obj) {
+                console.log("第1次打印");
+                console.log(obj);
                 var data = obj.data; //获得当前行数据
                 var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                 var tr = obj.tr; //获得当前行 tr 的DOM对象
@@ -176,6 +178,8 @@
                 var layerCallback;
                 switch (obj.event) {
                     case 'edit':
+                        console.log("第2次打印");
+                        console.log(obj);
                         layerCallback = function (callbackData) {
                             // 执行局部刷新, 获取之前的TABLE内容, 再进行填充
                             var dataBak = [];
@@ -195,6 +199,7 @@
                             offset: 'c',
                             area: ["500px", "350px"]
                         });
+                        break;
                 }
             });
 
