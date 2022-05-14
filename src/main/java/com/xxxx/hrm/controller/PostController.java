@@ -13,4 +13,12 @@ public class PostController extends BaseController {
 
     @Resource
     private PostService postService;
+
+
+    //转发到公告页面
+    @RequestMapping("index")
+    public String index(){
+        return "post_view";
+    }
+
 }
