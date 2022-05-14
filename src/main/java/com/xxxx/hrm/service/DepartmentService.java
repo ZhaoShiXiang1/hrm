@@ -38,6 +38,12 @@ public class DepartmentService extends BaseService<Department,Integer> {
     }
 
 
+    //根据id删除部门
+    public Integer deletedeptById(Integer id){
+        return  departmentMapper.deletedeptById(id);
+    }
+
+
 
 
 

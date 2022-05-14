@@ -89,4 +89,9 @@
         from department
     </select>
 
+
+    <delete id="deletedeptById" parameterType="int" >
+        delete from department where id =#{id}
+    </delete>
+
 </mapper>

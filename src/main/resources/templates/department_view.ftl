@@ -171,7 +171,7 @@
                     layer.close(index);
                     //向服务端发送删除指令
                     $.ajax({
-                        url: '/depts/' + data.id,
+                        url: '/files/delete?id=' + data.id,
                         type: 'delete',
                         success: function (res) {
                             console.log(res);

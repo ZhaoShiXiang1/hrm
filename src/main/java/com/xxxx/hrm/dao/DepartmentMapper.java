@@ -12,7 +12,9 @@ public interface DepartmentMapper extends BaseMapper<Department,Integer> {
     //查询所有
      public List<Department> queryAll(DepartmentQuery departmentQuery);
 
-    //查询所有
+
+    //根据id删除部门
+    public Integer deletedeptById(Integer id);
 
 
 }
