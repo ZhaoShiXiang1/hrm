@@ -98,4 +98,11 @@ public class UserAuthController extends BaseController {
         request.setAttribute("userAuth", userAuthService.selectByPrimaryKey(id));
         return "auth-edit";
     }
+
+    @RequestMapping("delete")
+    @ResponseBody
+    public ResultInfo userDelete(Integer id){
+        userAuthService.delete(id);
+        return success("资源删除成功");
+    }
 }

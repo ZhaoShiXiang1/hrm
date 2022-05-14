@@ -26,7 +26,7 @@
                     <img src="static/images/icons/diandian-icon.png" class="layui-nav-img">
                     ${(user.username)!"未登陆"}
                 </a>
-                <#--无前端页面 不实现了-->
+                <#--常坤：无前端页面 不实现了-->
    <#--             <dl class="layui-nav-child">
                     <dd><a href="">更改密码</a></dd>
                 </dl>-->
@@ -52,7 +52,7 @@
     <div class="layui-body">
         <!-- 内容主体区域 - 局部刷新, 使用iframe进行实现 -->
         <div style="padding: 15px; width: 100%; height: 100%">
-            <iframe style="width: 100%; height: 100%;" name="admin-list" scrolling="no" src="/auth" frameborder="0"></iframe>
+            <iframe style="width: 100%; height: 100%;" name="admin-list" scrolling="no" src="/user_auth/auth" frameborder="0"></iframe>
         </div>
     </div>
 </div>
