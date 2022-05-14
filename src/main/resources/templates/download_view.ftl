@@ -133,7 +133,7 @@
             var formData = new FormData();
             formData.append("file", file);
             $.ajax({
-                url: '/files/upload/',
+                url: 'upload',
                 method: 'post',
                 data: formData,
                 async: false,
@@ -143,6 +143,7 @@
                 success:function(res) {
                     console.log(res);
                     if (res.code == 200) {
+                        console.log("ceshishuju chuanshu");
                         // 添加到列表中
                         originalFilename = file.name;
                         $("#file-update-list").text(originalFilename);
@@ -324,9 +325,10 @@
                         $("#file-update-list").text(originalFilename);
                     },
                     yes: function () {
+
                         // 进行更新AJAX
                         $.ajax({
-                            url: '/files',
+                            url: 'updateTo',
                             method: 'put',
                             data: JSON.stringify({
                                 id: data.id,
@@ -336,10 +338,11 @@
                                 filename: originalFilename
                             }),
                             contentType: "application/json",
-
                             success: function (res) {
+                                console.log("顺利完成文件拷贝12");
                                 console.log(res);
                                 if (res.code == 200) {
+                                    console.log("顺利完成文件拷贝123");
                                     layer.msg('更改信息成功', {icon: 1});
                                     obj.update({
                                         title: $("#file-update-title").val(),

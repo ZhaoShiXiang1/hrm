@@ -7,9 +7,7 @@ import com.xxxx.hrm.service.FileUpLoadService;
 import com.xxxx.hrm.vo.FileUpLoad;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -64,7 +62,7 @@ public class FileUpLoadController extends BaseController {
     }
 
     // 文件上传(传入一个文件（原来的路径和文件名），复制到本地，传出一个结果：文件名，状态码 msg )
-    @RequestMapping ("/upload")
+    @PostMapping ("/upload")
     @ResponseBody
     public Map<Object,Object> uploadFile(MultipartFile file) throws IOException {
         //获取文件名称
@@ -83,6 +81,23 @@ public class FileUpLoadController extends BaseController {
         map.put("msg","数据查询成功");
         map.put("data",name);//获取名称返回名称
         System.out.println("-----------------------");
+        return map;
+    }
+    //更新文件
+    @PutMapping("/updateTo")
+    @ResponseBody
+    public Map<Object,Object> updateTo(@RequestBody FileUpLoad file){
+        //根据ID查询数据
+//        FileUpLoad file1 = fileUpLoadService.selectByPrimaryKey(file.getId());
+        System.out.println(filePath);
+        file.setPath(filePath+file.getPath());
+        System.out.println(file.getPath());
+       Integer num= fileUpLoadService.updateByPrimaryKeySelective(file);
+        System.out.println("num"+num);
+        System.out.println("数据更新成功");
+        Map<Object, Object> map = new HashMap<>();
+        map.put("code",200);
+        map.put("msg","数据查询成功");
         return map;
     }
 }
