@@ -2,25 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>用户管理插入子页面</title>
-    <script src="../../js/jquery-3.4.1.min.js"></script>
-    <script src="../../layui/layui.js"></script>
-    <link rel="stylesheet" href="../../layui/css/layui.css">
+    <title>用户数据修改子页面</title>
+    <script src="../static/js/jquery-3.4.1.min.js"></script>
+    <script src="../static/layui/layui.js"></script>
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
 </head>
 <body>
 <form class="layui-form" method="post" style="margin-top: 20px">
+    <input type="hidden" name="id" id="hidId" value="${(userAuth.id)!}">
     <div class="layui-form-item" style="padding-right: 50px; width: 300px; margin: 0 auto; margin-top: 15px">
         <label class="layui-form-label">登录名</label>
         <div class="layui-input-block">
             <input id="auth-username" type="text" name="title" required  lay-verify="required" placeholder="请输入登录名" autocomplete="off" class="layui-input">
         </div>
     </div>
-    <!--<div class="layui-form-item" style="padding-right: 50px; width: 300px; margin: 0 auto; margin-top: 15px ">
-        <label class="layui-form-label">姓名</label>
-        <div class="layui-input-block">
-            <input id="auth-name" type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
-        </div>
-    </div>-->
     <div class="layui-form-item" style="padding-right: 50px; width: 300px; margin: 0 auto; margin-top: 15px ">
         <label class="layui-form-label">密码</label>
         <div class="layui-input-block">
@@ -47,32 +42,35 @@
     layui.use('form', function(){
         var form = layui.form;
         var callbackData;
-        var nowDate = new Date();
+        var layer = layui.layer;
+        console.log("/user_auth/update?id="+$('[name="id"]').val())
         //监听提交
         form.on('submit(formDemo)', function(data){
             $.ajax({
-                url: '/auths',
-                method: 'post',
+                url: "/user_auth/update?id="+$('[name="id"]').val(),
+                method: 'get',
                 data: {
                     username: $("#auth-username").val(),
                     password: $("#auth-password").val(),
                     isAdmin: $("#auth-isAdmin").prop("checked"),
-                    createdTime: nowDate
+
                 },
-                success: function (res) {
-                    if (res.code == 200) {
+                success: function (result) {
+                    if (result.code == 200) {
                         callbackData = {
                             username: $("#auth-username").val(),
                             password: $("#auth-password").val(),
                             isAdmin: $("#auth-isAdmin").prop("checked"),
-                            createdTime: nowDate
+
                         }
-                        parent.layerCallback(callbackData);
-                        parent.layer.msg('添加用户成功', {icon: 1});
+                        // parent.layerCallback(callbackData);
+                        parent.layer.msg('用户修改成功', {icon: 1});
                         var index = parent.layer.getFrameIndex(window.name);
                         parent.layer.close(index);
+                        //刷新父页面，将添加的新数据展示
+                        parent.location.reload();
                     } else {
-                        parent.layer.msg('添加用户失败', {icon: 2});
+                        parent.layer.msg('用户修改失败', {icon: 2});
                     }
                 }
             });
