@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<#--更改内容展开页面-->
+<#--文件编辑更新弹出页面-->
 <script type="text/html" id="file-update">
     <form class="layui-form">
         <div class="layui-form-item" style="padding-right: 50px">
@@ -41,7 +41,7 @@
         </div>
     </form>
 </script>
-<#--文件上传展开页面-->
+<#--文件上传添加弹出页面-->
 <script type="text/html" id="file-insert">
     <form class="layui-form">
         <div class="layui-form-item" style="padding-right: 50px">
@@ -75,7 +75,7 @@
     </form>
 
 </script>
-
+<#--表头-->
 <table class="layui-hide" id="file-table" lay-filter="file-table"></table>
 <#--上传文件按钮-->
 <script type="text/html" id="toolbar">
@@ -97,7 +97,7 @@
     layui.use('table', function(){
 
         var table = layui.table;
-
+        //展示数据代码
         table.render({
             elem: '#file-table',
             url:'/files/list',
@@ -286,8 +286,8 @@
                     layer.close(index);
                     //向服务端发送删除指令
                     $.ajax({
-                        url: '/files/' + data.id,
-                        type: 'delete',
+                        url: '/files/delete?id=' + data.id,
+                        type: 'json',
                         success: function (res) {
                             console.log(res);
                             if (res.code == 200) {

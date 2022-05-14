@@ -11,4 +11,7 @@ public interface FileUpLoadMapper extends BaseMapper<FileUpLoad,Integer> {
 //查询所有文件数据
     public List<FileUpLoad> selectFilesAll(FileUpLoadQuery query);
 
+    //根据id删除文件数据
+    public Integer deleteFilesById(Integer id);
+
 }

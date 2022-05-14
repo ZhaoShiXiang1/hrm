@@ -1,6 +1,7 @@
 package com.xxxx.hrm.controller;
 
 import com.xxxx.hrm.base.BaseController;
+import com.xxxx.hrm.base.ResultInfo;
 import com.xxxx.hrm.query.FileUpLoadQuery;
 import com.xxxx.hrm.service.FileUpLoadService;
 import com.xxxx.hrm.vo.FileUpLoad;
@@ -33,4 +34,12 @@ public class FileUpLoadController extends BaseController {
         return fileUpLoadService.selectFilesAll(query);
     }
 
+    /**实现文件删除
+     * */
+    @RequestMapping("/delete")
+    @ResponseBody
+    public ResultInfo delete(Integer id){
+        fileUpLoadService.deleteFilesById(id);
+        return success("删除成功");
+    }
 }

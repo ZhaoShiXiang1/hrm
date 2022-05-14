@@ -35,5 +35,10 @@ public class FileUpLoadService extends BaseService<FileUpLoad,Integer> {
         map.put("data",filePageInfo.getList());
         return map;
     }
+
+    //根据id删除文件数据
+    public Integer deleteFilesById(Integer id){
+     return  fileUpLoadMapper.deleteFilesById(id);
+    }
 }
 
