@@ -45,7 +45,7 @@
 
         table.render({
             elem: '#position-table',
-            url:'/positions',
+            url:'/position',
             toolbar: '#toolbar',
             parseData: function (res) {
                 console.log(res);
@@ -95,7 +95,7 @@
                                 // 调用新建API
                                 var nowDate = new Date();
                                 $.ajax({
-                                    url: '/positions',
+                                    url: '/position',
                                     method: 'post',
                                     data: {
                                         name: name,
@@ -144,7 +144,7 @@
                     layer.close(index);
                     //向服务端发送删除指令
                     $.ajax({
-                        url: '/positions/' + data.id,
+                        url: '/position/' + data.id,
                         type: 'delete',
                         success: function (res) {
                             console.log(res);
@@ -159,7 +159,7 @@
             } else if(layEvent === 'edit'){ //编辑
                 // 发送更新请求
                 $.ajax({
-                    url: '/positions',
+                    url: '/position',
                     method: 'put',
                     data: JSON.stringify({
                         id: data.id,

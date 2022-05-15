@@ -6,4 +6,6 @@ import com.xxxx.hrm.vo.Position;
 //职位管理
 public interface PositionMapper extends BaseMapper<Position,Integer> {
 
+    //添加职位
+    Integer insertPosition(Integer id);
 }

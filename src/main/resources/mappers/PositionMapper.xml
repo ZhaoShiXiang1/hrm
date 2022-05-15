@@ -84,8 +84,8 @@
   <insert id="insertPosition" parameterType="com.xxxx.hrm.vo.Position" >
     insert into position (id, name, description,
                           created_time)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
-            #{createdTime,jdbcType=TIMESTAMP})
+    values (#{id}, #{name}, #{description},
+            #{createdTime})
   </insert>
 
 </mapper>
