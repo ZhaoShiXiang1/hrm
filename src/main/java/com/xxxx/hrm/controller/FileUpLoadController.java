@@ -84,8 +84,25 @@ public class FileUpLoadController extends BaseController {
         System.out.println(new File(str).mkdir());
         //查询文件如果存在删除
         System.out.println("路径");
-        //获取文件名称
-        String name = file.getOriginalFilename();
+        //重命名文件名称
+        String name = file.getOriginalFilename();//获取原来的文件名和后缀
+        int num = name.lastIndexOf(".");//获取后缀点所在的索引
+       String path = name.substring(num);//获取后缀.xxx
+        name = System.currentTimeMillis()+path;
+        System.out.println(name);
+
+//        System.out.println("获取索引位置");
+//        Integer num = "ceshi.txt".lastIndexOf(".");
+//        System.out.println(num);
+//        System.out.println("获取后缀名");
+//        System.out.println("ceshi.txt".substring(num));
+//
+//        System.out.println(System.currentTimeMillis());
+//
+//
+//        name=name.
+//        name.lastIndexOf(".");
+
         //将内容转换成数组写出
         byte[] arr = file.getBytes();
         FileOutputStream out = new FileOutputStream(new File(filePath+name));
@@ -134,7 +151,7 @@ public class FileUpLoadController extends BaseController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
         //需要一个文件名
-        headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", new String(file.getFilename().getBytes("UTF-8"),"ISO-8859-1")));
+        headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", new String(fileUpLoadService.selectByPrimaryKey(id).getFilename().getBytes("UTF-8"),"ISO-8859-1")));
         headers.add("Pragma", "no-cache");
         headers.add("Expires", "0");
 //
