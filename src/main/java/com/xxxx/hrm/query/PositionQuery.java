@@ -1,10 +1,12 @@
-package com.xxxx.hrm.vo;
+package com.xxxx.hrm.query;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.xxxx.hrm.base.BaseQuery;
+import com.xxxx.hrm.vo.Position;
 
 import java.util.Date;
 
-public class Position {
+public class PositionQuery extends BaseQuery {
     private Integer id;
 
     private String name;
@@ -27,7 +29,7 @@ public class Position {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getDescription() {
@@ -35,21 +37,11 @@ public class Position {
     }
 
     public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
+        this.description = description;
     }
 
     public Date getCreatedTime() {
         return createdTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Position{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", createdTime=" + createdTime +
-                '}';
     }
 
     public void setCreatedTime(Date createdTime) {

@@ -95,4 +95,18 @@
   <select id="queryAllPosition" resultType="map">
         select id,name from position;
   </select>
+  <!--职位管理保存职位-->
+  <update id="updatePosition" parameterType="com.xxxx.hrm.vo.Position" >
+    update position
+    set name         = #{name,jdbcType=VARCHAR},
+        description  = #{description,jdbcType=VARCHAR},
+        created_time = #{createdTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--删除职位 parameterType="com.xxxx.hrm.vo.Position"-->
+  <delete id="deletePosition"  parameterType="int">
+    delete from position
+    where id = #{id}
+  </delete>
 </mapper>
