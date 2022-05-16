@@ -170,9 +170,9 @@
                     obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                     layer.close(index);
                     //向服务端发送删除指令
+                    console.log('/files/delete?id=' + data.id)
                     $.ajax({
-                        url: '/files/delete?id=' + data.id,
-                        type: 'delete',
+                        url: '/dep/delete?id=' + data.id,
                         success: function (res) {
                             console.log(res);
                             if (res.code == 200) {
