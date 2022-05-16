@@ -124,5 +124,4 @@
     delete from fileupload where id =#{id}
   </delete>
 
-
 </mapper>

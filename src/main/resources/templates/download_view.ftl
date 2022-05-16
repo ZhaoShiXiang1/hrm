@@ -10,6 +10,7 @@
 
 <#--文件编辑更新弹出页面-->
 <script type="text/html" id="file-update">
+
     <form class="layui-form">
         <div class="layui-form-item" style="padding-right: 50px">
             <label class="layui-form-label">标题</label>
@@ -95,8 +96,6 @@
 <script>
     //上传后文件暂存的地址
     var realUUIDname = "";
-    //设置全局变量rowId，存储行对应行的id,实现文件删除
-    rowId=-1;
     //上传后的文件名
     var originalFilename = "";
     layui.use('table', function(){
@@ -134,7 +133,6 @@
             console.log(file);
             var formData = new FormData();
             formData.append("file", file);
-
             $.ajax({
                 url: 'upload?id='+id,
                 method: 'post',
@@ -338,6 +336,7 @@
                             data: JSON.stringify({
                                 id: data.id,
                                 title: $("#file-update-title").val(),
+                                //将重命名后的文件名传到后台
                                 path: realUUIDname,
                                 description: $("#file-update-description").val(),
                                 filename: originalFilename
