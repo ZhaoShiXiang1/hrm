@@ -38,7 +38,7 @@ public class DepartmentService extends BaseService<Department,Integer> {
         //创建键值对
         map.put("code",200);
         map.put("msg","数据查询成功");
-        map.put("count",departmentPageInfoPageInfo.getTotal());
+        map.put("size",departmentPageInfoPageInfo.getTotal());
         map.put("data",departmentPageInfoPageInfo.getList());
         return map;
     }
