@@ -160,7 +160,7 @@
                 // 发送更新请求
                 $.ajax({
                     url: '/positions/update',
-
+                    method: 'put',
                     data: JSON.stringify({
                         id: data.id,
                         name: data.name,

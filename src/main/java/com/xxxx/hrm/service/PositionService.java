@@ -13,6 +13,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -50,50 +52,29 @@ public class PositionService extends BaseService<Position, Integer> {
     @Transactional(propagation = Propagation.REQUIRED)
     public void addPosition(Position position) {
         AssertUtil.isTrue(StringUtils.isBlank(position.getName()), "添加职位名称不能为空");
-        //AssertUtil.isTrue(StringUtils.isBlank(position.getId()),"添加职位名称不能为空");
         AssertUtil.isTrue(StringUtils.isBlank(position.getDescription()), "职位描述不能为空");
-        //AssertUtil.isTrue(null != positionMapper.insertPosition(position), "职位名已存在");
         // 校验参数
         checkPositionParams(position.getName(), position.getDescription());
         //设置默认值
         position.setCreatedTime(new Date());
         //执行添加操作
-        AssertUtil.isTrue(positionMapper.insertPosition(position) < 1,"用户添加失败");
+        AssertUtil.isTrue(positionMapper.insertPosition(position) < 1,"职位添加失败");
     }
 
     /*
     * 保存职位信息
     * */
     @Transactional(propagation = Propagation.REQUIRED)
-    public Integer updatePosition(Position position){
+    public Integer updatePosition( Position position){
         //设置默认值
         position.setCreatedTime(new Date());
         return positionMapper.updatePosition(position);
     }
-//    @Transactional(propagation = Propagation.REQUIRED)
-//    public void updatePosition(Position position){
-//        System.out.println(position);
-//        //id     非空|存在
-//        AssertUtil.isTrue(null == position.getId() ,"职位不存在");
-//        Position dbposition = positionMapper.selectByPrimaryKey(position.getId());
-//        //用户名  非空 | 唯一
-//        AssertUtil.isTrue(position.getName() == null,"职位名称不能为空");
-//        // 名称唯一
-//        AssertUtil.isTrue(dbposition != null && position.getId() != dbposition.getId(),"用户名已存在");
-//        //设置默认值
-//        position.setCreatedTime(new Date());
-//        //执行修改操作
-//        AssertUtil.isTrue(positionMapper.updateByPrimaryKeySelective(position) < 1,"职位修改失败");
-//    }
 
     /*
      * 删除职位信息
      * */
-    /*@Transactional(propagation = Propagation.REQUIRED)
-    public void deletePosition(Integer[] ids){
-        AssertUtil.isTrue(ids == null || ids.length < 1,"未选中删除数据");
-        positionMapper.deletePosition(ids);
-    }*/
+    @Transactional(propagation = Propagation.REQUIRED)
     public Integer deletePosition(Integer id){
         return  positionMapper.deletePosition(id);
     }
@@ -108,6 +89,4 @@ public class PositionService extends BaseService<Position, Integer> {
         AssertUtil.isTrue(StringUtils.isBlank(name),"职位名称不能为空");
         AssertUtil.isTrue(StringUtils.isBlank(description),"描述不能为空");
     }
-
-
 }
