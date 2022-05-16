@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 //登录拦截
-@Configuration
+//@Configuration
 public class MyConfig implements WebMvcConfigurer {
 
     @Bean
