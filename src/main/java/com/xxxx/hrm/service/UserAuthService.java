@@ -41,16 +41,17 @@ public class UserAuthService extends BaseService<UserAuth, Integer> {
     /*
      * 多条件查询数据
      */
-    public Map<String, Object> queryAllUserAuths(UserAuthQuery query) {
-        Map<String, Object> map = new HashMap<>();
+    public Map<Object, Object> queryAllUserAuths(UserAuthQuery query) {
+        Map<Object, Object> map = new HashMap<>();
         //开启分页
         PageHelper.startPage(query.getPage(), query.getLimit());
+        //使用方法查询数据，返回数组
         List<UserAuth> userAuths = userAuthMapper.queryAllUserAuths(query);
         //按照分页条件，格式化数据
         PageInfo<UserAuth> userAuthsPageInfo = new PageInfo<>(userAuths);
         map.put("code", 0);
         map.put("msg", "");
-        map.put("count", userAuthsPageInfo.getTotal());
+        map.put("size", userAuthsPageInfo.getTotal());
         map.put("data", userAuthsPageInfo.getList());
         return map;
     }
@@ -76,10 +77,9 @@ public class UserAuthService extends BaseService<UserAuth, Integer> {
         AssertUtil.isTrue(StringUtils.isBlank(password), "密码不能为空!");
 
     }
-
+    //修改用户
     public void updateUserAuth(UserAuth userAuth) {
         //判断id是否存在
-        System.out.println(userAuth.getId());
         AssertUtil.isTrue(userAuth.getId() == null, "数据异常，请重试");
         //校验参数
         checkParams(userAuth.getUsername(), String.valueOf(userAuth.getId()));
