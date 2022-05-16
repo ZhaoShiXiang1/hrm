@@ -1,14 +1,13 @@
 package com.xxxx.hrm.config;
-/*
 
-import com.xxxx.crm.interceptors.LoginInterceptor;
+import com.xxxx.hrm.interceptors.LoginInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 //登录拦截
-//@Configuration
+@Configuration
 public class MyConfig implements WebMvcConfigurer {
 
     @Bean
@@ -20,7 +19,7 @@ public class MyConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(createLoginInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/index","/user/login","/css/**","/images/**","/js/**","/lib/**");
+                .excludePathPatterns("/login","/user_auth/login","/css/**","/images/**","/js/**","/lib/**");
+                //.excludePathPatterns("/index","/user/login","/css/**","/images/**","/js/**","/lib/**");
     }
 }
-*/

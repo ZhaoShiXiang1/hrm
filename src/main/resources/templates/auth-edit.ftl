@@ -27,11 +27,6 @@
         <div class="layui-input-block">
             <input id="auth-isAdmin" type="checkbox" lay-filter="insert_switch" lay-skin="switch" name="close" lay-text="是|否" <#if userAuth.isAdmin == true>checked</#if>>
         </div>
-       <#-- <div class="layui-input-block">
-            <#if userAuth.isAdmin??><p>测试1</p></#if>
-            <#if userAuth.isAdmin==true><p>测试2</p></#if>
-            <#if userAuth.isAdmin!=ture><p>测试3</p></#if>
-        </div>-->
     </div>
 
     <div class="layui-form-item" style="padding-right: 40px; width: 300px; margin: 0 auto; margin-top: 40px">
@@ -68,14 +63,16 @@
                             isAdmin: $("#auth-isAdmin").prop("checked"),
 
                         }
-                        // parent.layerCallback(callbackData);
+                        //parent.layerCallback(callbackData);
                         parent.layer.msg('用户修改成功', {icon: 1});
                         var index = parent.layer.getFrameIndex(window.name);
-                        parent.layer.close(index);
+                        console.log("frameIndex");
+                        console.log(index);
+                        // parent.layer.close(index);
                         //刷新父页面，将添加的新数据展示
                         //window.location.href = "/user_auth/auth";
-                        //location.reload();
                         parent.location.reload();
+                        // layer.closeAll("iframe");
                     } else {
                         parent.layer.msg('用户修改失败', {icon: 2});
                     }
