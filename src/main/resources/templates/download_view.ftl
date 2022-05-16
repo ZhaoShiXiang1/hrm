@@ -8,9 +8,8 @@
 </head>
 <body>
 
-<#--文件编辑更新弹出页面-->
+<#--文件编辑按钮更新弹出页面,并触发onUpdateFile(this,rowId:全局变量，获取行ID)更新文件夹文件;-->
 <script type="text/html" id="file-update">
-
     <form class="layui-form">
         <div class="layui-form-item" style="padding-right: 50px">
             <label class="layui-form-label">标题</label>
@@ -18,6 +17,7 @@
                 <input id="file-update-title" type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
             </div>
         </div>
+
         <div class="layui-form-item layui-form-text" style="padding-right: 50px">
             <label class="layui-form-label">描述</label>
             <div class="layui-input-block">
@@ -42,7 +42,7 @@
         </div>
     </form>
 </script>
-<#--文件上传添加弹出页面-->
+<#--文件上传添加弹出页面-，并触发onChangeFile(this)上传文件至文件夹-->
 <script type="text/html" id="file-insert">
     <form class="layui-form">
         <div class="layui-form-item" style="padding-right: 50px">
@@ -68,7 +68,6 @@
                         <span class="layui-form-mid" id="file-list"></span>
                         <div class="layui-input-block">
                             <input type="file" style="visibility: hidden" onchange="onChangeFile(this);" name="file" >
-<#--                            <a href="#"  name="file" style="visibility: hidden" onchange="onChangeFile(this)">登录</a>-->
                         </div>
                     </div>
                 </form>
@@ -77,7 +76,7 @@
     </form>
 
 </script>
-<#--表头-->
+<#--表头，用于事件监听-->
 <table class="layui-hide" id="file-table" lay-filter="file-table"></table>
 <#--上传文件按钮-->
 <script type="text/html" id="toolbar">
@@ -85,21 +84,21 @@
         <button class="layui-btn layui-btn-sm" lay-event="addFile">上传文件</button>
     </div>
 </script>
-<#--显示右侧信息-->
+<#--显示右侧编辑/删除/下载按钮-->
 <script type="text/html" id="barTpl">
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="download" id="download-btn">下载</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
-<#--原页面数据展示代码-->
+<#--代码，实现事件监听和数据呈现-->
 <script>
     //上传后文件暂存的地址
     var realUUIDname = "";
     //上传后的文件名
     var originalFilename = "";
+    //渲染的表格，展示数据库数据
     layui.use('table', function(){
-
         var table = layui.table;
         //展示数据代码
         table.render({
@@ -127,7 +126,7 @@
             ,page: true
         });
 
-        //附件更改附件
+        //附件更改附件的方法
         onUpdateFile = function (obj,id) {
             var file = obj.files[0];
             console.log(file);
@@ -161,7 +160,7 @@
                 }
             });
         },
-        //    上传附件方法
+        //上传附件方法
         onChangeFile = function (obj) {
             //获取文件信息
             var file = obj.files[0];
@@ -204,7 +203,7 @@
             });
         }
 
-        // 上方工具条监听
+        // 监听上方添加文件工作条
         table.on('toolbar(file-table)', function (obj) {
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
@@ -287,9 +286,7 @@
             }
         });
 
-
-
-        //监听工具条上传文件(右侧)
+        //监听工具条上传文件(右侧)，文件编辑/下载/删除事件
         table.on('tool(file-table)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
