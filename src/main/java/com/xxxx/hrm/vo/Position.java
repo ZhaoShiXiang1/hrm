@@ -42,16 +42,6 @@ public class Position {
         return createdTime;
     }
 
-    @Override
-    public String toString() {
-        return "Position{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", createdTime=" + createdTime +
-                '}';
-    }
-
     public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
     }

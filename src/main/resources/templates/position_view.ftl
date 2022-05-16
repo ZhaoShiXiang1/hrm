@@ -45,7 +45,7 @@
 
         table.render({
             elem: '#position-table',
-            url:'/positions/list',
+            url:'/position',
             toolbar: '#toolbar',
             parseData: function (res) {
                 console.log(res);
@@ -95,7 +95,8 @@
                                 // 调用新建API
                                 var nowDate = new Date();
                                 $.ajax({
-                                    url: '/positions/add',
+                                    url: '/position',
+                                    method: 'post',
                                     data: {
                                         name: name,
                                         description: description,
@@ -137,14 +138,13 @@
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
-            console.log(data);
             if(layEvent === 'del'){ //删除
                 layer.confirm('删除用户' + data.name + '?', {skin: 'layui-layer-molv',offset:'c', icon:'0'},function(index){
                     obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                     layer.close(index);
                     //向服务端发送删除指令
                     $.ajax({
-                        url: '/positions/delete?id=' + data.id,
+                        url: '/position/' + data.id,
                         type: 'delete',
                         success: function (res) {
                             console.log(res);
@@ -159,7 +159,7 @@
             } else if(layEvent === 'edit'){ //编辑
                 // 发送更新请求
                 $.ajax({
-                    url: '/positions/update',
+                    url: '/position',
                     method: 'put',
                     data: JSON.stringify({
                         id: data.id,
@@ -169,7 +169,6 @@
                     contentType: "application/json",
                     success: function (res) {
                         console.log(res);
-                        console.log("res.code == 200");
                         if (res.code == 200) {
                             layer.msg('更新成功', {icon: 1});
                             obj.update({
