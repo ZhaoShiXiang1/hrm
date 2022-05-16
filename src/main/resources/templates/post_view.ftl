@@ -92,7 +92,7 @@
         var table = layui.table;
         table.render({
             elem: '#post-table',
-            url:'/posts/',
+            url:'list',
             toolbar: '#toolbar',
             parseData: function (res) {
                 console.log(res);
@@ -109,7 +109,7 @@
                         return row.title;
                     }},
                 {field:'content', width:400, title:'公告内容'},
-                {field:'username', width:150, title: '公告人', templet: function (row) {
+                {field:'username', width:150, title: '发布公告者', templet: function (row) {
                         if (row.username == null ) return "无此用户";
                         return row.username;
                     }},
@@ -133,7 +133,7 @@
                     layer.close(index);
                     //向服务端发送删除指令
                     $.ajax({
-                        url: '/posts/' + data.id,
+                        url: '/posts/delete?id=' + data.id,
                         type: 'delete',
                         success: function (res) {
                             console.log(res);
@@ -168,7 +168,7 @@
                 json = JSON.stringify(obj.data);
                 layer.open({
                     title: '编辑公告',
-                    content: 'static/html/layers/post-update.html',
+                    content: "/posts/toUpdatePage?id="+data.id,
                     type: 2,
                     //content: $("#post-insert").text(),
 
@@ -210,8 +210,7 @@
                                 // 获取session中数据
                                 var username = "${(user.username)!'未登陆'}";
                                 $.ajax({
-                                    url: '/posts',
-                                    method: 'post',
+                                    url: 'add',
                                     data: {
                                         title: title,
                                         content: content,

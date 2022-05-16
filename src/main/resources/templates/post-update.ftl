@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>公告更新子页面</title>
-    <script src="../../js/jquery-3.4.1.min.js"></script>
-    <script src="../../layui/layui.js"></script>
-    <link rel="stylesheet" href="../../layui/css/layui.css">
+    <script src="../static/js/jquery-3.4.1.min.js"></script>
+    <script src="../static/layui/layui.js"></script>
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
     <script>
         $(function () {
-            var parent_json = eval('('+parent.json+')');
+            var parent_json = eval('(' + parent.json + ')');
             $("#post-title").val(parent_json.title);
             $("#post-content").val(parent_json.content);
         });
@@ -16,10 +16,12 @@
 </head>
 
 <form class="layui-form" method="post" style="margin-top: 20px">
+    <input type="hidden" name="id" id="hidId" value="${(post.id)!}">
     <div class="layui-form-item">
         <label class="layui-form-label">标题</label>
         <div class="layui-input-block" style="width: 340px">
-            <input id="post-title" type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+            <input id="post-title" type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+                   autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item layui-form-text" style="padding-right: 50px">
@@ -35,33 +37,35 @@
         </div>
     </div>
 </form>
-
 <script>
     //Demo
     layui.use('form', function(){
         var form = layui.form;
-        var parent_json = eval('('+parent.json+')');
-        $("#post-title").val(parent_json.title);
-        $("#post-content").val(parent_json.content);
-        console.log(parent_json.id);
+        var callbackData;
+        var layer = layui.layer;
         //监听提交
-        form.on('submit(formDemo)', function(data){
+        form.on('submit(formDemo)', function (data) {
             $.ajax({
-                url: '/posts',
-                method: 'put',
-                data: JSON.stringify({
-                    id: parent_json.id,
+                url: "/posts/update?id=" + $('[name="id"]').val(),
+                method: 'get',
+                data: {
                     title: $("#post-title").val(),
-                    content: $("#post-content").val()
-                }),
-                contentType: "application/json",
-                success: function (res) {
-                    console.log(res);
-                    if (res.code == 200) {
-                        parent.layerCallback($("#post-title").val(), $("#post-content").val());
-                        parent.layer.msg('修改公告成功', {icon: 1});
+                    content: $("#post-content").val(),
+
+                },
+                success: function (result) {
+                    if (result.code == 200) {
+                        callbackData = {
+                            title: $("#post-title").val(),
+                            content: $("#post-content").val(),
+                        }
+                        parent.layer.msg('公告修改成功', {icon: 1});
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+
+                        parent.location.reload();
                     } else {
-                        parent.layer.msg('修改公告失败', {icon: 2});
+                        parent.layer.msg('公告修改失败', {icon: 2});
                     }
                 }
             });
