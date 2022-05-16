@@ -98,7 +98,6 @@ public class PositionService extends BaseService<Position, Integer> {
         return  positionMapper.deletePosition(id);
     }
 
-
     /**
      * 校验用户添加数据
      *
