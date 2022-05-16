@@ -137,6 +137,7 @@
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var tr = obj.tr; //获得当前行 tr 的DOM对象
+            console.log(data);
             if(layEvent === 'del'){ //删除
                 layer.confirm('删除用户' + data.name + '?', {skin: 'layui-layer-molv',offset:'c', icon:'0'},function(index){
                     obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
@@ -158,8 +159,8 @@
             } else if(layEvent === 'edit'){ //编辑
                 // 发送更新请求
                 $.ajax({
-                    url: '/positions/update?id=' + data.id,
-                    method: 'put',
+                    url: '/positions/update',
+
                     data: JSON.stringify({
                         id: data.id,
                         name: data.name,
@@ -168,6 +169,7 @@
                     contentType: "application/json",
                     success: function (res) {
                         console.log(res);
+                        console.log("res.code == 200");
                         if (res.code == 200) {
                             layer.msg('更新成功', {icon: 1});
                             obj.update({

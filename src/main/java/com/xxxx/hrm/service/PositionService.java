@@ -70,20 +70,21 @@ public class PositionService extends BaseService<Position, Integer> {
         position.setCreatedTime(new Date());
         return positionMapper.updatePosition(position);
     }
-
-    /* public void updatePosition(Position position){
-        //id     非空|存在
-        AssertUtil.isTrue(null == position.getId() ,"职位不存在");
-        Position dbposition = positionMapper.selectByPrimaryKey(position.getId());
-        //用户名  非空 | 唯一
-        AssertUtil.isTrue(position.getName() == null,"职位名称不能为空");
-        // 名称唯一
-        AssertUtil.isTrue(dbposition != null && position.getId() != dbposition.getId(),"用户名已存在");
-        //设置默认值
-        position.setCreatedTime(new Date());
-        //执行修改操作
-        AssertUtil.isTrue(positionMapper.updateByPrimaryKeySelective(position) < 1,"职位修改失败");
-    }*/
+//    @Transactional(propagation = Propagation.REQUIRED)
+//    public void updatePosition(Position position){
+//        System.out.println(position);
+//        //id     非空|存在
+//        AssertUtil.isTrue(null == position.getId() ,"职位不存在");
+//        Position dbposition = positionMapper.selectByPrimaryKey(position.getId());
+//        //用户名  非空 | 唯一
+//        AssertUtil.isTrue(position.getName() == null,"职位名称不能为空");
+//        // 名称唯一
+//        AssertUtil.isTrue(dbposition != null && position.getId() != dbposition.getId(),"用户名已存在");
+//        //设置默认值
+//        position.setCreatedTime(new Date());
+//        //执行修改操作
+//        AssertUtil.isTrue(positionMapper.updateByPrimaryKeySelective(position) < 1,"职位修改失败");
+//    }
 
     /*
      * 删除职位信息
