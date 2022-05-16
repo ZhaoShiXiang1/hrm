@@ -106,7 +106,7 @@
   </update>
   <!--查询所有数据-->
   <select id="selectPostAll" resultType="com.xxxx.hrm.vo.Post" >
-    select * from post
+    select id, title, username, created_time createdTime , content from post
   </select>
 
   <delete id="deletePostById" parameterType="int" >

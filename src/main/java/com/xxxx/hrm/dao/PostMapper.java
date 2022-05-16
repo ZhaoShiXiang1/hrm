@@ -12,4 +12,7 @@ import java.util.List;
 public interface PostMapper extends BaseMapper<Post,Integer> {
     //查询所有文件数据
     public List<Post> selectPostAll(PostQuery query);
+
+    //根据id删除文件数据
+    public Integer deletePostById(Integer id);
 }
