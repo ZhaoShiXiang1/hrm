@@ -87,7 +87,26 @@
     values (#{id}, #{name}, #{description},
             #{createdTime})
   </insert>
+  <!--查询所有职位信息-->
+  <select id="queryAllPositions" resultType="com.xxxx.hrm.vo.Position"  parameterType="com.xxxx.hrm.query.PositionQuery">
+    select id, name, description, created_time createdTime
+    from position
+  </select>
 
+  <!--删除职位 parameterType="com.xxxx.hrm.vo.Position"-->
+  <delete id="deletePosition"  parameterType="int">
+    delete from position
+    where id = #{id}
+  </delete>
+
+  <!--职位管理保存职位-->
+  <update id="updatePosition" parameterType="com.xxxx.hrm.vo.Position" >
+    update position
+    set name         = #{name,jdbcType=VARCHAR},
+        description  = #{description,jdbcType=VARCHAR},
+        created_time = #{createdTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 
   <!--查询下拉框的职位-->
   <!--key 为 id   value 为 name-->
