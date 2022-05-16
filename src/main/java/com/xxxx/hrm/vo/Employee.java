@@ -9,7 +9,7 @@ public class Employee {
 
     private String name;
 
-    private Boolean sex;
+    private Integer sex;
 
     private String phone;
 
@@ -28,6 +28,47 @@ public class Employee {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private Date createdTime;
 
+    //添加字段，数据库不存在
+    private String positionName;
+
+    //添加字段，数据库不存在
+    private String deptName;
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sex=" + sex +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", education='" + education + '\'' +
+                ", idcard='" + idcard + '\'' +
+                ", address='" + address + '\'' +
+                ", positionId=" + positionId +
+                ", deptId=" + deptId +
+                ", createdTime=" + createdTime +
+                ", positionName='" + positionName + '\'' +
+                ", deptName='" + deptName + '\'' +
+                '}';
+    }
+
+    public String getPositionName() {
+        return positionName;
+    }
+
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -44,11 +85,11 @@ public class Employee {
         this.name = name == null ? null : name.trim();
     }
 
-    public Boolean getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 

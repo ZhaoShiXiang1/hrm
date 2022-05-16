@@ -47,7 +47,13 @@
                     <!--{type:'checkbox', fixed:'left'},-->
                     {field: 'id', width: 60, title: 'ID'},
                     {field: 'name', width: 100, title: '员工姓名'},
-                    {field: 'sex', width: 70, title: '性别'},
+                    {field: 'sex', width: 70, title: '性别',templet: function (row) {
+                            if (row.sex == true) {
+                                return "<div >男</div>";
+                            } else if(row.education == false) {
+                                return "<div >女</div>";
+                            }
+                        }},
                     {field: 'phone', width: 120, title: '手机号'},
                     {field: 'email', width: 110, title: '邮箱'},
                     {field: 'education', width: 70, title: '学历',templet: function (row) {
@@ -61,10 +67,10 @@
                         }},
                     {field: 'idcard', width: 120, title: '身份证'},
                     {field: 'address', width: 100, title: '地址'},
-                    {field: 'positionId', width: 50, title: '职位编号'},
+                    /*{field: 'positionId', width: 50, title: '职位编号'},*/
                     {field: 'positionName', width: 80, title: '职位'},
                     {field: 'deptName', width: 80, title: '部门'},
-                    {field: 'deptId', width: 80, title: '部门编号'},
+                    /*{field: 'deptId', width: 80, title: '部门编号'},*/
                     {field: 'createdTime', width: 180, title: '创建时间', sort: true},
                     {fixed: 'right', width: 150, align: 'center', toolbar: '#barTpl'}
                 ]],
@@ -111,7 +117,7 @@
                             layer.close(index);
                             //向服务端发送删除指令
                             $.ajax({
-                                url: '/user_auth/delete?id=' + data.id,
+                                url: '/emp/deleteEmp?id=' + data.id,
                                 success: function (res) {
                                     console.log(res);
                                     if (res.code == 200) {

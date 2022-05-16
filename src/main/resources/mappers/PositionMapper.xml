@@ -88,4 +88,11 @@
             #{createdTime})
   </insert>
 
+
+  <!--查询下拉框的职位-->
+  <!--key 为 id   value 为 name-->
+  <!--List<Map<String, Object>> queryAllPosition();-->
+  <select id="queryAllPosition" resultType="map">
+        select id,name from position;
+  </select>
 </mapper>

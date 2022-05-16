@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class PositionService extends BaseService<Position, Integer> {
@@ -49,4 +51,8 @@ public class PositionService extends BaseService<Position, Integer> {
         AssertUtil.isTrue(StringUtils.isBlank(description),"手机号不能为空");
     }
 
+    //查询下拉框的职位列表
+    public List<Map<String, Object>> queryAllPosition() {
+        return positionMapper.queryAllPosition();
+    }
 }

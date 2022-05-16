@@ -61,5 +61,10 @@ public class DepartmentService extends BaseService<Department,Integer> {
         return  departmentMapper.updateByPrimaryKeySelective(department);
     }
 
+
+    //查询下拉框的部门列表
+    public List<Map<String, Object>> queryAllDept() {
+        return departmentMapper.queryAllDept();
+    }
 }
 

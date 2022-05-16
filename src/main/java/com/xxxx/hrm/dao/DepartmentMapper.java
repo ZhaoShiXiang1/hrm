@@ -5,6 +5,7 @@ import com.xxxx.hrm.query.DepartmentQuery;
 import com.xxxx.hrm.vo.Department;
 
 import java.util.List;
+import java.util.Map;
 
 //部门管理
 public interface DepartmentMapper extends BaseMapper<Department,Integer> {
@@ -17,4 +18,7 @@ public interface DepartmentMapper extends BaseMapper<Department,Integer> {
     public Integer deletedeptById(Integer id);
 
 
+
+    //查询下拉框的部门列表
+    List<Map<String, Object>> queryAllDept();
 }
