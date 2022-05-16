@@ -48,6 +48,7 @@ public class FileUpLoadService extends BaseService<FileUpLoad,Integer> {
    }
    //更新文件
    public Integer updateByPrimaryKeySelective(FileUpLoad file){
+
        return  fileUpLoadMapper.updateByPrimaryKeySelective(file);
    }
 }
