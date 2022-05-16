@@ -5,11 +5,15 @@ import com.github.pagehelper.PageInfo;
 import com.xxxx.hrm.base.BaseService;
 import com.xxxx.hrm.dao.DepartmentMapper;
 import com.xxxx.hrm.query.DepartmentQuery;
+import com.xxxx.hrm.utils.AssertUtil;
 import com.xxxx.hrm.vo.Department;
 import com.xxxx.hrm.vo.FileUpLoad;
+import com.xxxx.hrm.vo.UserAuth;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +23,8 @@ public class DepartmentService extends BaseService<Department,Integer> {
 
     @Resource
     private DepartmentMapper departmentMapper;
+
+
 
     //查询部门
     public Map<Object,Object> queryAll(DepartmentQuery query){
@@ -44,8 +50,16 @@ public class DepartmentService extends BaseService<Department,Integer> {
     }
 
 
+    //添加文件
+    public Integer add(Department department){
+        return  departmentMapper.insertSelective(department);
+    }
 
 
+    //修改部门
+    public Integer updateByPrimaryKeySelective(Department department){
+        return  departmentMapper.updateByPrimaryKeySelective(department);
+    }
 
 }
 
