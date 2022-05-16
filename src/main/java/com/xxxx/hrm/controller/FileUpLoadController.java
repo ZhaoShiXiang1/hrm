@@ -54,6 +54,8 @@ public class FileUpLoadController extends BaseController {
     @RequestMapping("/delete")
     @ResponseBody
     public ResultInfo delete(Integer id){
+        //删除存储在数据库中的文件
+      new File("" + (fileUpLoadService.selectByPrimaryKey(id).getPath())).delete();
         fileUpLoadService.deleteFilesById(id);
         return success("删除成功");
     }
@@ -62,6 +64,7 @@ public class FileUpLoadController extends BaseController {
     @RequestMapping("/add")
     @ResponseBody
     public ResultInfo add(FileUpLoad file){
+        System.out.println(file.getPath());
         fileUpLoadService.add(file);
         return success("文件添加成功") ;
     }
@@ -69,10 +72,20 @@ public class FileUpLoadController extends BaseController {
     // 文件上传(传入一个文件（原来的路径和文件名），复制到本地，传出一个结果：文件名，状态码 msg )
     @PostMapping ("/upload")
     @ResponseBody
-    public Map<Object,Object> uploadFile(MultipartFile file) throws IOException {
+    public Map<Object,Object> uploadFile(MultipartFile file,Integer rowId) throws IOException {
+        System.out.println("打印"+rowId);
+        //删除存储在数据库中的文件
+        if (null!=fileUpLoadService.selectByPrimaryKey(rowId)){
+            new File("" + (fileUpLoadService.selectByPrimaryKey(rowId).getPath())).delete();
+        }
+        //创建指定文件夹
+        String str=filePath.substring(0,filePath.length()-1);
+        System.out.println(str);
+        System.out.println(new File(str).mkdir());
+        //查询文件如果存在删除
+        System.out.println("路径");
         //获取文件名称
         String name = file.getOriginalFilename();
-
         //将内容转换成数组写出
         byte[] arr = file.getBytes();
         FileOutputStream out = new FileOutputStream(new File(filePath+name));
@@ -92,8 +105,6 @@ public class FileUpLoadController extends BaseController {
     @PutMapping("/updateTo")
     @ResponseBody
     public Map<Object,Object> updateTo(@RequestBody FileUpLoad file){
-        //根据ID查询数据
-//        FileUpLoad file1 = fileUpLoadService.selectByPrimaryKey(file.getId());
         System.out.println(filePath);
         file.setPath(filePath+file.getPath());
         System.out.println(file.getPath());
@@ -109,25 +120,30 @@ public class FileUpLoadController extends BaseController {
     //实现文件下载(文件名/数组长度/IO流)
     @RequestMapping("/downloadFile")
     public ResponseEntity<InputStreamResource> downloadFile(Integer id) throws IOException {
+        System.out.println("id"+id);
+        System.out.println("文件开始下载");
         //文件绝对路径
         String filepath = fileUpLoadService.selectByPrimaryKey(id).getPath();
+        System.out.println(filepath);
         //根据绝对路径创建一个文件对象
         FileSystemResource file = new FileSystemResource(filepath);
+        System.out.println(file.getFilename());
+        System.out.println(file.contentLength());
+
         //将数据封装到请求头
         HttpHeaders headers = new HttpHeaders();
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
         //需要一个文件名
-        headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getFilename()));//获取文件名加后缀
+        headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", new String(file.getFilename().getBytes("UTF-8"),"ISO-8859-1")));
         headers.add("Pragma", "no-cache");
         headers.add("Expires", "0");
-
+//
         return ResponseEntity
                 .ok()
                 .headers(headers)//加入该对象
                 .contentLength(file.contentLength())//内容字符数组线长度
                 .contentType(MediaType.parseMediaType("application/octet-stream"))//字符
                 .body(new InputStreamResource(file.getInputStream()));//放入一个流I/O
-
     }
 
 }

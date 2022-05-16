@@ -33,7 +33,7 @@
                         </button>
                         <span class="layui-form-mid" id="file-update-list"></span>
                         <div class="layui-input-block">
-                            <input type="file" style="visibility: hidden" onchange="onUpdateFile(this);" name="file" >
+                            <input type="file" style="visibility: hidden" onchange="onUpdateFile(this,rowId);" name="file" >
                         </div>
                     </div>
                 </form>
@@ -95,6 +95,8 @@
 <script>
     //上传后文件暂存的地址
     var realUUIDname = "";
+    //设置全局变量rowId，存储行对应行的id,实现文件删除
+    rowId=-1;
     //上传后的文件名
     var originalFilename = "";
     layui.use('table', function(){
@@ -127,13 +129,14 @@
         });
 
         //附件更改附件
-        onUpdateFile = function (obj) {
+        onUpdateFile = function (obj,id) {
             var file = obj.files[0];
             console.log(file);
             var formData = new FormData();
             formData.append("file", file);
+
             $.ajax({
-                url: 'upload',
+                url: 'upload?id='+id,
                 method: 'post',
                 data: formData,
                 async: false,
@@ -219,7 +222,7 @@
                         yes: function () {
                             var title = $("#file-title").val();
                             var description = $("#file-description").val();
-                            if (title.length <= 0  || description.length <= 0) {
+                            if (title.length <= 0  || description.length <= 0||realUUIDname.length <= 0) {
                                 if (title.length <= 0) {
                                     layer.tips('标题不能为空', '#file-title',  {
                                         tipsMore: true
@@ -230,6 +233,7 @@
                                         tipsMore: true
                                     });
                                 }
+                                console.log("打印名字");
                                 console.log(realUUIDname);
                                 if (realUUIDname.length <= 0) {
                                     layer.tips('未选择文件', '#test1', {
@@ -247,7 +251,7 @@
                                     data: {
                                         title: title,
                                         description: description,
-                                        path: 'D:/hrm-upload/'+realUUIDname,
+                                        path: 'C:/hrm-upload/'+realUUIDname,
                                         filename: originalFilename,
                                         username: username,
                                         createdTime: nowDate
@@ -311,6 +315,7 @@
                     })
                 });
             } else if(layEvent === 'edit'){ //编辑
+                rowId = data.id;
                 // 发送更新请求
                 layer.open({
                     btn: '保存',
