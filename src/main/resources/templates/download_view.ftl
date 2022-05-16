@@ -160,48 +160,48 @@
                 }
             });
         },
-        //上传附件方法
-        onChangeFile = function (obj) {
-            //获取文件信息
-            var file = obj.files[0];
-            console.log(file);
-            var relativePath = 'work/' + $("select[name='class']").val();
-            console.log("relativePath");
-            console.log(relativePath);
-            var formData = new FormData();
-            formData.append("file", file);
-            formData.append("relativePath", relativePath);
-            $.ajax({
-                url: 'upload',
-                method: 'post',
-                data: formData,
-                async: false,
-                cache: false,
-                processData:false,
-                contentType:false,
-                success:function(res) {
-                    if (res.code == 200) {
-                        console.log("res.code == 200");
-                        // 添加到列表中
-                        $("#file-list").text(file.name);
-                        //原文件名
-                        originalFilename = file.name;
-                        //加密的文件名
-                        realUUIDname = res.data;
-                        console.log("上传附件后打印名字");
-                        console.log(originalFilename);
-                        console.log(realUUIDname);
-                        layer.tips('附件上传成功', '#file-list', {
-                            tipsMore: true
-                        });
-                    } else {
-                        layer.tips('附件上传失败', '#file-update-list', {
-                            tipsMore: true
-                        });
+            //上传附件方法
+            onChangeFile = function (obj) {
+                //获取文件信息
+                var file = obj.files[0];
+                console.log(file);
+                var relativePath = 'work/' + $("select[name='class']").val();
+                console.log("relativePath");
+                console.log(relativePath);
+                var formData = new FormData();
+                formData.append("file", file);
+                formData.append("relativePath", relativePath);
+                $.ajax({
+                    url: 'upload',
+                    method: 'post',
+                    data: formData,
+                    async: false,
+                    cache: false,
+                    processData:false,
+                    contentType:false,
+                    success:function(res) {
+                        if (res.code == 200) {
+                            console.log("res.code == 200");
+                            // 添加到列表中
+                            $("#file-list").text(file.name);
+                            //原文件名
+                            originalFilename = file.name;
+                            //加密的文件名
+                            realUUIDname = res.data;
+                            console.log("上传附件后打印名字");
+                            console.log(originalFilename);
+                            console.log(realUUIDname);
+                            layer.tips('附件上传成功', '#file-list', {
+                                tipsMore: true
+                            });
+                        } else {
+                            layer.tips('附件上传失败', '#file-update-list', {
+                                tipsMore: true
+                            });
+                        }
                     }
-                }
-            });
-        }
+                });
+            }
 
         // 监听上方添加文件工作条
         table.on('toolbar(file-table)', function (obj) {

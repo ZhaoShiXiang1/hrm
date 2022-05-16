@@ -94,4 +94,9 @@
         delete from department where id =#{id}
     </delete>
 
+
+    <!--查询下拉框的部门列表-->
+    <select id="queryAllDept" resultType="map">
+        select id,name from department;
+    </select>
 </mapper>

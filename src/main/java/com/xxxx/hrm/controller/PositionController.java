@@ -7,9 +7,7 @@ import com.xxxx.hrm.query.PositionQuery;
 import com.xxxx.hrm.service.PositionService;
 import com.xxxx.hrm.vo.Position;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -36,13 +34,14 @@ public class PositionController extends BaseController {
         return success("职位添加成功");
     }
 
-     //修改职位信息
-     @RequestMapping ("update")
-     @ResponseBody
-     public ResultInfo updatePosition(Position position){
-         positionService.updatePosition(position);
-         return success("职位修改成功");
-     }
+    //修改职位信息
+    @RequestMapping("update")
+    @ResponseBody
+    public ResultInfo updatePosition(@RequestBody Position position){
+        System.out.println(position);
+        positionService.updatePosition(position);
+        return success("职位修改成功");
+    }
 
     //删除职位信息
     @RequestMapping("delete")
@@ -56,5 +55,4 @@ public class PositionController extends BaseController {
     public String toUpdateAddPage(){
         return "position_view";
     }
-
 }

@@ -7,6 +7,27 @@
     <link rel="stylesheet" href="../static/layui/css/layui.css">
 </head>
 <body>
+
+<form class="layui-form">
+    <div class="layui-inline">
+        <div class="layui-input-inline">
+            <input type="text" name="name" class="layui-input searchVal"  placeholder="姓名"/>
+        </div>
+        <div class="layui-input-inline">
+            <input type="text" name="phone" class="layui-input
+							searchVal" placeholder="手机"/>
+        </div>
+        <div class="layui-input-inline">
+            <input type="text" name="idcard" class="layui-input
+							searchVal" placeholder="身份证"/>
+        </div>
+
+        <a class="layui-btn search_btn" id="btnSearch" data-type="reload">
+            <i class="layui-icon">&#xe615;</i> 搜索
+        </a>
+    </div>
+</form>
+
 <table class="layui-hide" id="employee-table" lay-filter="employee-table" style="height: 100%"></table>
 
 <script type="text/html" id="toolbar">
@@ -30,7 +51,7 @@
         layui.use(['table', 'form'], function () {
             var table = layui.table;
             var form = layui.form;
-            table.render({
+            var tableIns =table.render({
                 elem: '#employee-table',
                 url: '/emp/list',
                 toolbar: '#toolbar',
@@ -47,7 +68,13 @@
                     <!--{type:'checkbox', fixed:'left'},-->
                     {field: 'id', width: 60, title: 'ID'},
                     {field: 'name', width: 100, title: '员工姓名'},
-                    {field: 'sex', width: 70, title: '性别'},
+                    {field: 'sex', width: 70, title: '性别',templet: function (row) {
+                            if (row.sex == true) {
+                                return "<div >男</div>";
+                            } else if(row.education == false) {
+                                return "<div >女</div>";
+                            }
+                        }},
                     {field: 'phone', width: 120, title: '手机号'},
                     {field: 'email', width: 110, title: '邮箱'},
                     {field: 'education', width: 70, title: '学历',templet: function (row) {
@@ -61,14 +88,29 @@
                         }},
                     {field: 'idcard', width: 120, title: '身份证'},
                     {field: 'address', width: 100, title: '地址'},
-                    {field: 'positionId', width: 50, title: '职位编号'},
+                    /*{field: 'positionId', width: 50, title: '职位编号'},*/
                     {field: 'positionName', width: 80, title: '职位'},
                     {field: 'deptName', width: 80, title: '部门'},
-                    {field: 'deptId', width: 80, title: '部门编号'},
+                    /*{field: 'deptId', width: 80, title: '部门编号'},*/
                     {field: 'createdTime', width: 180, title: '创建时间', sort: true},
                     {fixed: 'right', width: 150, align: 'center', toolbar: '#barTpl'}
                 ]],
                 page: true
+            });
+
+
+            //这里以搜索为例
+            $("#btnSearch").click(function (){
+                tableIns.reload({
+                    where: { //设定异步数据接口的额外参数，任意设
+                        name:$('[name="name"]').val(),
+                        phone:$('[name="phone"]').val(),
+                        idcard:$('[name="idcard"]').val()
+                    }
+                    ,page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                });
             });
 
 
@@ -111,7 +153,7 @@
                             layer.close(index);
                             //向服务端发送删除指令
                             $.ajax({
-                                url: '/user_auth/delete?id=' + data.id,
+                                url: '/emp/deleteEmp?id=' + data.id,
                                 success: function (res) {
                                     console.log(res);
                                     if (res.code == 200) {
@@ -159,7 +201,11 @@
         });
 
 
+
+
     });
+
+
 
 
 </script>

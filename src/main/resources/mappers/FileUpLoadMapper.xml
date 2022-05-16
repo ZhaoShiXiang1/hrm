@@ -14,7 +14,7 @@
     id, title, description, filename, path, username, created_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from fileupload
     where id = #{id,jdbcType=INTEGER}
@@ -114,12 +114,12 @@
       created_time = #{createdTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-<!--查询所有数据-->
+  <!--查询所有数据-->
   <select id="selectFilesAll" resultType="com.xxxx.hrm.vo.FileUpLoad" parameterType="com.xxxx.hrm.query.FileUpLoadQuery">
     select id, title, description, filename, path, username, created_time createdTime from fileupload
   </select>
 
-<!--  根据ID删除文件-->
+  <!--  根据ID删除文件-->
   <delete id="deleteFilesById" parameterType="int" >
     delete from fileupload where id =#{id}
   </delete>

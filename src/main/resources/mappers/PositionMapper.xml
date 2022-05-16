@@ -16,12 +16,10 @@
     from position
     where id = #{id,jdbcType=INTEGER}
   </select>
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from position
     where id = #{id,jdbcType=INTEGER}
   </delete>
-
   <insert id="insert" parameterType="com.xxxx.hrm.vo.Position" >
     insert into position (id, name, description, 
       created_time)
@@ -82,31 +80,38 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-    <!--查询所有职位信息-->
-  <select id="queryAllPositions" resultType="com.xxxx.hrm.vo.Position"  parameterType="com.xxxx.hrm.query.PositionQuery">
-    select id, name, description, created_time createdTime
-    from position
-  </select>
-    <!--职位管理添加职位-->
+  <!--职位管理添加职位-->
   <insert id="insertPosition" parameterType="com.xxxx.hrm.vo.Position" >
     insert into position (id, name, description,
                           created_time)
     values (#{id}, #{name}, #{description},
             #{createdTime})
   </insert>
-
-  <!--职位管理保存职位-->
-  <update id="updatePosition" parameterType="com.xxxx.hrm.vo.Position" >
-    update position
-    set name = #{name},
-        description = #{description},
-        created_time = #{createdTime}
-    where id = #{id}
-  </update>
+  <!--查询所有职位信息-->
+  <select id="queryAllPositions" resultType="com.xxxx.hrm.vo.Position"  parameterType="com.xxxx.hrm.query.PositionQuery">
+    select id, name, description, created_time createdTime
+    from position
+  </select>
 
   <!--删除职位 parameterType="com.xxxx.hrm.vo.Position"-->
   <delete id="deletePosition"  parameterType="int">
     delete from position
     where id = #{id}
   </delete>
+
+  <!--职位管理保存职位-->
+  <update id="updatePosition" parameterType="com.xxxx.hrm.vo.Position" >
+    update position
+    set name         = #{name,jdbcType=VARCHAR},
+        description  = #{description,jdbcType=VARCHAR},
+        created_time = #{createdTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--查询下拉框的职位-->
+  <!--key 为 id   value 为 name-->
+  <!--List<Map<String, Object>> queryAllPosition();-->
+  <select id="queryAllPosition" resultType="map">
+        select id,name from position;
+  </select>
 </mapper>

@@ -161,4 +161,67 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+
+  <!--多条件查询-->
+  <select id="selectAllEmp" parameterType="com.xxxx.hrm.query.EmployeeQuery" resultType="com.xxxx.hrm.vo.Employee">
+    select id, name, sex, phone, email, education, idcard, address, position_id positionId, dept_id deptId, created_time createdTime
+    from employee
+    <where>
+      <if test=" null != name and '' != name">
+        and name like concat("%",#{name},"%")
+      </if>
+      <if test=" null != phone and '' != phone">
+        and phone = #{phone}
+      </if>
+      <if test=" null != idcard and '' != idcard">
+        and idcard = #{idcard}
+      </if>
+    </where>
+  </select>
+
+
+  <!--添加用户-->
+  <insert id="addEmp" parameterType="com.xxxx.hrm.vo.Employee" >
+    INSERT into employee (name,sex,phone,email,education,idcard,address,position_id,dept_id,created_time)
+    VALUES (#{name},#{sex},#{phone},#{email},#{education},#{idcard},#{address},#{positionId},#{deptId},#{createdTime})
+  </insert>
+
+
+  <!--修改用户-->
+  <update id="updateEmp" parameterType="com.xxxx.hrm.vo.Employee" >
+    update employee
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=BIT},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="positionId != null" >
+        position_id = #{positionId,jdbcType=INTEGER},
+      </if>
+      <if test="deptId != null" >
+        dept_id = #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

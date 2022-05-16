@@ -27,17 +27,17 @@ public class FileUpLoadController extends BaseController {
     @Resource
     private FileUpLoadService fileUpLoadService;
 
-/**
- * 触发前台页面跳转至下载中心
- * */
+    /**
+     * 触发前台页面跳转至下载中心
+     * */
     @RequestMapping("/download")
     public String index(){
         return "download_view";
     }
 
-/**
- * 页面访问后台查询全部数据展示到前台
- * */
+    /**
+     * 页面访问后台查询全部数据展示到前台
+     * */
     @RequestMapping("/list")
     @ResponseBody
     public Map<Object,Object> selectFilesAll(FileUpLoadQuery query){
@@ -68,7 +68,7 @@ public class FileUpLoadController extends BaseController {
     @PostMapping ("/upload")
     @ResponseBody
     public Map<Object,Object> uploadFile(MultipartFile file,Integer id) throws IOException {
-       return fileUpLoadService.uploadFile(file,id);
+        return fileUpLoadService.uploadFile(file,id);
     }
 
 
@@ -87,6 +87,6 @@ public class FileUpLoadController extends BaseController {
     //实现文件下载(文件名/数组长度/IO流)
     @RequestMapping("/downloadFile")
     public ResponseEntity<InputStreamResource> downloadFile(Integer id) throws IOException {
-      return   fileUpLoadService.downloadFile(id);
+        return   fileUpLoadService.downloadFile(id);
     }
 }
