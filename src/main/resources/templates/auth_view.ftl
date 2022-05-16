@@ -117,11 +117,17 @@
                     {field: 'password', width: 150, title: '密码'},
 
                     {
-                        field: 'isAdmin', width: 130, title: '是否为管理员', templet: function (row) {
-                            return [
-                                '<input type="checkbox" lay-filter="admin_switch" lay-skin="switch" lay-text="是|否" ',
-                                row.isAdmin == true ? "checked />" : " />"
-                            ].join('');
+                        field: 'isAdmin', width: 130, title: '是否为管理员'
+                        , templet: function (row) {
+                            // return [
+                            //     '<input type="checkbox" lay-filter="admin_switch" lay-skin="switch" lay-text="是|否" ',
+                            //     row.isAdmin == true ? "checked />" : " />"
+                            // ].join('');
+                            if (row.isAdmin == true) {
+                                return "<div style='color: limegreen'>管理员</div>";
+                            } else {
+                                return "<div style='color: red;'>非管理员</div>";
+                            }
 
                         }
                     },
@@ -137,16 +143,15 @@
             });
 
 
-
             /*右侧工具栏监听*/
             table.on('tool(auth-table)', function (obj) {
                 var data = obj.data; //获得当前行数据
                 var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                 var tr = obj.tr; //获得当前行 tr 的DOM对象
-                var url = "/user_auth/toUpdatePage?id="+data.id;
+                var url = "/user_auth/toUpdatePage?id=" + data.id;
                 var layerCallback;
                 switch (obj.event) {
-                    case 'edit':
+                    case 'edit'://编辑触发
                         layerCallback = function (callbackData) {
                             // 执行局部刷新, 获取之前的TABLE内容, 再进行填充
                             var dataBak = [];
@@ -167,7 +172,7 @@
                             area: ["500px", "350px"]
                         });
                         break;
-                    case 'del':
+                    case 'del'://删除触发
                         layer.confirm('删除用户' + data.username + '?', {
                             skin: 'layui-layer-molv',
                             offset: 'c',
@@ -222,7 +227,8 @@
                         });
                 }
             });
-        });
+        })
+        ;
 
 
         /* 搜索实现, 使用reload, 进行重新请求 */

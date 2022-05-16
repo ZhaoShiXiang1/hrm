@@ -41,10 +41,11 @@ public class UserAuthService extends BaseService<UserAuth, Integer> {
     /*
      * 多条件查询数据
      */
-    public Map<String, Object> queryAllUserAuths(UserAuthQuery query) {
-        Map<String, Object> map = new HashMap<>();
+    public Map<Object, Object> queryAllUserAuths(UserAuthQuery query) {
+        Map<Object, Object> map = new HashMap<>();
         //开启分页
         PageHelper.startPage(query.getPage(), query.getLimit());
+        //使用方法查询数据，返回数组
         List<UserAuth> userAuths = userAuthMapper.queryAllUserAuths(query);
         //按照分页条件，格式化数据
         PageInfo<UserAuth> userAuthsPageInfo = new PageInfo<>(userAuths);

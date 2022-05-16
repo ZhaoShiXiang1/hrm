@@ -1,7 +1,6 @@
 package com.xxxx.hrm.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 public class UserAuth {

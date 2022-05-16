@@ -56,7 +56,7 @@ public class UserAuthController extends BaseController {
      */
     @RequestMapping("list")
     @ResponseBody
-    public Map<String, Object> queryAllUserAuths(UserAuthQuery query) {
+    public Map<Object, Object> queryAllUserAuths(UserAuthQuery query) {
         return userAuthService.queryAllUserAuths(query);
     }
 
