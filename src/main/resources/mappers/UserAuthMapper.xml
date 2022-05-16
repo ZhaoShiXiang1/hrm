@@ -104,7 +104,7 @@
     <where>
       <if test="username != null and username != ''">
         and username like concat("%",#{username},"%")
-        
+
       </if>
       <if test="id != null and id != ''">
         and id = #{id}

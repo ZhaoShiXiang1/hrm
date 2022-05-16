@@ -77,10 +77,9 @@ public class UserAuthService extends BaseService<UserAuth, Integer> {
         AssertUtil.isTrue(StringUtils.isBlank(password), "密码不能为空!");
 
     }
-
+    //修改用户
     public void updateUserAuth(UserAuth userAuth) {
         //判断id是否存在
-        System.out.println(userAuth.getId());
         AssertUtil.isTrue(userAuth.getId() == null, "数据异常，请重试");
         //校验参数
         checkParams(userAuth.getUsername(), String.valueOf(userAuth.getId()));
