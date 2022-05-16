@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="static/js/jquery-3.4.1.min.js"></script>
-    <script src="static/layui/layui.js"></script>
-    <link rel="stylesheet" href="static/layui/css/layui.css">
+    <script src="../static/js/jquery-3.4.1.min.js"></script>
+    <script src="../static/layui/layui.js"></script>
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
 </head>
 <body>
 
@@ -45,7 +45,7 @@
 
         table.render({
             elem: '#position-table',
-            url:'/position',
+            url:'/positions/list',
             toolbar: '#toolbar',
             parseData: function (res) {
                 console.log(res);
@@ -95,8 +95,7 @@
                                 // 调用新建API
                                 var nowDate = new Date();
                                 $.ajax({
-                                    url: '/position',
-                                    method: 'post',
+                                    url: '/positions/add',
                                     data: {
                                         name: name,
                                         description: description,
@@ -144,7 +143,7 @@
                     layer.close(index);
                     //向服务端发送删除指令
                     $.ajax({
-                        url: '/position/' + data.id,
+                        url: '/positions/delete?id=' + data.id,
                         type: 'delete',
                         success: function (res) {
                             console.log(res);
@@ -159,7 +158,7 @@
             } else if(layEvent === 'edit'){ //编辑
                 // 发送更新请求
                 $.ajax({
-                    url: '/position',
+                    url: '/positions/update?id=' + data.id,
                     method: 'put',
                     data: JSON.stringify({
                         id: data.id,

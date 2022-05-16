@@ -16,10 +16,12 @@
     from position
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from position
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.xxxx.hrm.vo.Position" >
     insert into position (id, name, description, 
       created_time)
@@ -80,7 +82,12 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <!--职位管理添加职位-->
+    <!--查询所有职位信息-->
+  <select id="queryAllPositions" resultType="com.xxxx.hrm.vo.Position"  parameterType="com.xxxx.hrm.query.PositionQuery">
+    select id, name, description, created_time createdTime
+    from position
+  </select>
+    <!--职位管理添加职位-->
   <insert id="insertPosition" parameterType="com.xxxx.hrm.vo.Position" >
     insert into position (id, name, description,
                           created_time)
@@ -88,4 +95,18 @@
             #{createdTime})
   </insert>
 
+  <!--职位管理保存职位-->
+  <update id="updatePosition" parameterType="com.xxxx.hrm.vo.Position" >
+    update position
+    set name = #{name},
+        description = #{description},
+        created_time = #{createdTime}
+    where id = #{id}
+  </update>
+
+  <!--删除职位 parameterType="com.xxxx.hrm.vo.Position"-->
+  <delete id="deletePosition"  parameterType="int">
+    delete from position
+    where id = #{id}
+  </delete>
 </mapper>
