@@ -98,8 +98,8 @@
   </select>
 
   <!--查询对应的角色名称和id反馈给前台使用-->
-  <select id="queryAllUserAuths" resultType="map">
-    select username,id,password,is_admin isAdmin,created_time createdTime
+  <select id="queryAllUserAuths" resultType="com.xxxx.hrm.vo.UserAuth" parameterType="com.xxxx.hrm.query.UserAuthQuery">
+    select id,username,password,is_admin isAdmin,created_time createdTime
     from userauth
     <where>
       <if test="username != null and username != ''">

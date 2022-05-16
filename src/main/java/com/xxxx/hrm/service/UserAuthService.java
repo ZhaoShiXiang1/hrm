@@ -51,7 +51,7 @@ public class UserAuthService extends BaseService<UserAuth, Integer> {
         PageInfo<UserAuth> userAuthsPageInfo = new PageInfo<>(userAuths);
         map.put("code", 0);
         map.put("msg", "");
-        map.put("count", userAuthsPageInfo.getTotal());
+        map.put("size", userAuthsPageInfo.getTotal());
         map.put("data", userAuthsPageInfo.getList());
         return map;
     }

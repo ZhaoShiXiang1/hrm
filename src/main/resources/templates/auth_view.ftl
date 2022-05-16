@@ -105,24 +105,11 @@
                 , cols: [[
                     <!--{type:'checkbox', fixed:'left'},-->
                     {field: 'id', width: 60, title: 'ID'},
-                    {
-                        field: 'username', width: 120, title: '账户名', templet: function (row) {
-                            return [
-                                '<div>',
-                                '<a href="#">' + row.username + '</a>',
-                                '</div>'
-                            ].join('');
-                        }
-                    },
+                    {field: 'username', width: 120, title: '账户名'},
                     {field: 'password', width: 150, title: '密码'},
-
                     {
                         field: 'isAdmin', width: 130, title: '是否为管理员'
                         , templet: function (row) {
-                            // return [
-                            //     '<input type="checkbox" lay-filter="admin_switch" lay-skin="switch" lay-text="是|否" ',
-                            //     row.isAdmin == true ? "checked />" : " />"
-                            // ].join('');
                             if (row.isAdmin == true) {
                                 return "<div style='color: limegreen'>管理员</div>";
                             } else {
