@@ -311,6 +311,7 @@
                             }
                         }
                     })
+                    location.reload();
                 });
             } else if(layEvent === 'edit'){ //编辑
                 rowId = data.id;

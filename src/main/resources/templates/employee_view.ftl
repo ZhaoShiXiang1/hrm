@@ -158,6 +158,7 @@
                                     console.log(res);
                                     if (res.code == 200) {
                                         layer.msg('删除成功', {icon: 1, skin: 'layui-layer-molv', offset: 'c'});
+                                        location.reload();
                                     } else {
                                         layer.msg('删除失败', {icon: 2, skin: 'layui-layer-molv', offset: 'c'});
                                     }

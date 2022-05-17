@@ -19,7 +19,7 @@
     <div class="layui-form-item" style="padding-right: 50px; width: 300px; margin: 0 auto; margin-top: 15px ">
         <label class="layui-form-label">密码</label>
         <div class="layui-input-block">
-            <input id="auth-password" type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="${(userAuth.password)!""}">
+            <input id="auth-password" type="text" name="title" required  lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input" value="${(userAuth.password)!""}">
         </div>
     </div>
     <div class="layui-form-item" style="padding-right: 50px; width: 300px; margin: 0 auto; margin-top: 15px ">
