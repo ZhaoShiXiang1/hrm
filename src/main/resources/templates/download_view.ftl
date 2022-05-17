@@ -120,7 +120,7 @@
                 {field:'description', width:300, title:'描述', edit: true},
                 {field:'username', width:150, title: '创建者'},
                 {field:'createdTime', width:180, title: '创建时间', sort: true},
-                {field:'filename', width: 120, title: '文件名称', hide: true},
+                {field:'filename', width: 120, title: '文件名称'},
                 {fixed: 'right', width:180, align:'center', toolbar: '#barTpl'}
             ]]
             ,page: true
@@ -162,6 +162,7 @@
         },
             //上传附件方法
             onChangeFile = function (obj) {
+                console.log("触发方法");
                 //获取文件信息
                 var file = obj.files[0];
                 console.log(file);
@@ -210,6 +211,7 @@
             var tr = obj.tr; //获得当前行 tr 的DOM对象
             switch(obj.event){
                 case 'addFile':
+
                     layer.open({
                         btn: '上传',
                         title: '文件上传',
@@ -275,6 +277,7 @@
                                                 data:dataBak   // 将新数据重新载入表格
                                             });
                                             layer.msg('上传文件成功', {icon: 1});
+                                            realUUIDname="";
                                         } else {
                                             layer.msg('上传文件失败', {icon: 2});
                                         }
