@@ -63,6 +63,9 @@ public class UserAuthService extends BaseService<UserAuth, Integer> {
     public void addUserAuth(UserAuth userAuth) {
         //校验参数
         checkParams(userAuth.getUsername(), String.valueOf(userAuth.getId()));
+        //校验当前角色是否已存在
+        UserAuth temp = userAuthMapper.queryUserByName(userAuth.getUsername());
+        AssertUtil.isTrue(null !=temp,"该角色已存在!");
         //设置时间默认值
         userAuth.setCreatedTime(new Date());
         //执行添加操作，判断是否添加成功
@@ -83,6 +86,9 @@ public class UserAuthService extends BaseService<UserAuth, Integer> {
         AssertUtil.isTrue(userAuth.getId() == null, "数据异常，请重试");
         //校验参数
         checkParams(userAuth.getUsername(), String.valueOf(userAuth.getId()));
+        //校验当前角色是否已存在
+        UserAuth temp = userAuthMapper.queryUserByName(userAuth.getUsername());
+        AssertUtil.isTrue(null !=temp,"该角色已存在!");
         //设置时间默认值
         userAuth.setCreatedTime(new Date());
         //通过现有的id查询修改之前的数据

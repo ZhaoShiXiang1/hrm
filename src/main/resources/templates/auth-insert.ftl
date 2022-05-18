@@ -67,7 +67,10 @@
                         parent.layer.close(index);
                         //刷新父页面，将添加的新数据展示
                         // parent.location.reload();
-                    } else {
+                    } else if(result.msg =="该角色已存在!"){
+                        parent.layer.msg('该角色已存在!', {icon: 2});
+                    }
+                    else {
                         parent.layer.msg('添加用户失败', {icon: 2});
                     }
                 }
