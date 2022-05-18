@@ -180,10 +180,8 @@
                                 name: data.name,
                                 description: data.description
                             });
-                        }else if(res.msg=''){
-
-                        } else {
-                            layer.msg('更新失败', {icon: 2});
+                        }else {
+                            layer.msg(res.msg, {icon: 2});
                         }
                     }
                 });

@@ -99,4 +99,8 @@
     <select id="queryAllDept" resultType="map">
         select id,name from department;
     </select>
+    
+    <select id="queryByName" parameterType="String" resultType="com.xxxx.hrm.vo.Department">
+        select * from department where name =#{name}
+    </select>
 </mapper>

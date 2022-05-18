@@ -21,4 +21,6 @@ public interface DepartmentMapper extends BaseMapper<Department,Integer> {
 
     //查询下拉框的部门列表
     List<Map<String, Object>> queryAllDept();
+    //根据部门名称查询数据
+    Department queryByName(String name);
 }

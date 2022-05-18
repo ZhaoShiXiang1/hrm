@@ -3,6 +3,7 @@ package com.xxxx.hrm.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xxxx.hrm.base.BaseService;
+import com.xxxx.hrm.dao.DepartmentMapper;
 import com.xxxx.hrm.dao.PositionMapper;
 import com.xxxx.hrm.query.PositionQuery;
 import com.xxxx.hrm.utils.AssertUtil;
@@ -22,6 +23,8 @@ public class PositionService extends BaseService<Position, Integer> {
 
     @Resource
     private PositionMapper positionMapper;
+    @Resource
+    private DepartmentMapper departmentMapper;
 
     /*
      *添加职位
@@ -64,6 +67,10 @@ public class PositionService extends BaseService<Position, Integer> {
     public Integer updatePosition(Position position){
         //设置默认值
         position.setCreatedTime(new Date());
+        Position dbpositon = positionMapper.selectPositionByName(position.getName());
+        AssertUtil.isTrue(null!=dbpositon&&position.getId() != dbpositon.getId(),"职位名称已存在");
+        System.out.println("测试保存职位");
+        System.out.println(position.getId());
         return positionMapper.updatePosition(position);
     }
 

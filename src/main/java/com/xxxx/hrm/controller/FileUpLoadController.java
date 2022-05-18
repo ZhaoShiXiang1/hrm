@@ -64,7 +64,7 @@ public class FileUpLoadController extends BaseController {
         return success("文件添加成功");
     }
 
-    // 文件上传(传入一个文件（原来的路径和文件名），复制到本地，传出一个结果：文件名，状态码 msg )
+    // 文件上传和更新(传入一个文件（原来的路径和文件名），复制到本地，传出一个结果：文件名，状态码 msg )
     @PostMapping ("/upload")
     @ResponseBody
     public Map<Object,Object> uploadFile(MultipartFile file,Integer id) throws IOException {
@@ -72,7 +72,7 @@ public class FileUpLoadController extends BaseController {
     }
 
 
-    //更新文件
+    //更新数据库内容信息
     @PutMapping("/updateTo")
     @ResponseBody
     public Map<Object,Object> updateTo(@RequestBody FileUpLoad file){

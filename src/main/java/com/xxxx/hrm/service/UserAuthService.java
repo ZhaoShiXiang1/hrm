@@ -88,7 +88,7 @@ public class UserAuthService extends BaseService<UserAuth, Integer> {
         checkParams(userAuth.getUsername(), String.valueOf(userAuth.getId()));
         //校验当前角色是否已存在
         UserAuth temp = userAuthMapper.queryUserByName(userAuth.getUsername());
-        AssertUtil.isTrue(null !=temp,"该角色已存在!");
+        AssertUtil.isTrue(null!=temp&&userAuth.getId() != temp.getId() ,"该角色已存在!");
         //设置时间默认值
         userAuth.setCreatedTime(new Date());
         //通过现有的id查询修改之前的数据

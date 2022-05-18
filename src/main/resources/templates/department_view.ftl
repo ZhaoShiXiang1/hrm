@@ -123,7 +123,7 @@
                                             });
                                             layer.msg('新建部门成功', {icon: 1});
                                         } else {
-                                            layer.msg('新建部门失败', {icon: 2});
+                                            layer.msg(res.msg, {icon: 2});
                                         }
                                     }
                                 });

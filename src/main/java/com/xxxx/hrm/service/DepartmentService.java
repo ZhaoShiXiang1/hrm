@@ -52,12 +52,14 @@ public class DepartmentService extends BaseService<Department,Integer> {
 
     //添加文件
     public Integer add(Department department){
+        AssertUtil.isTrue(null!=departmentMapper.queryByName(department.getName()),"部门已存在");
         return  departmentMapper.insertSelective(department);
     }
 
 
     //修改部门
     public Integer updateByPrimaryKeySelective(Department department){
+        AssertUtil.isTrue(null!=departmentMapper.queryByName(department.getName())&&departmentMapper.queryByName(department.getName()).getId()!=department.getId(),"部门已存在");
         return  departmentMapper.updateByPrimaryKeySelective(department);
     }
 

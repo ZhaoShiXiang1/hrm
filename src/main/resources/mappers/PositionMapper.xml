@@ -116,7 +116,7 @@
   </select>
 
 <!--  查询所有职位的名称-->
-  <select id="selectPositionByName" parameterType="String"  resultType="position">
+  <select id="selectPositionByName" parameterType="String"  resultType="com.xxxx.hrm.vo.Position">
     select name from position where name = #{name};
   </select>
 
