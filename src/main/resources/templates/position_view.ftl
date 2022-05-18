@@ -155,6 +155,7 @@
                             }
                         }
                     })
+                    location.reload();
                 });
             } else if(layEvent === 'edit'){ //编辑
                 // 发送更新请求

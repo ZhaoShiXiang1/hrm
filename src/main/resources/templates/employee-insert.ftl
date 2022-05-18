@@ -25,7 +25,7 @@
     <div class="layui-form-item" style="padding-right: 50px; width: 300px; margin: 0 auto; margin-top: 15px">
         <label class="layui-form-label">性别</label>
         <div class="layui-input-block">
-            <input type="radio" name="employee-sex" value="1" title="男" <#if employee??><#if employee.sex == 1>checked</#if></#if>>
+            <input type="radio" name="employee-sex" value="1" checked title="男" <#if employee??><#if employee.sex == 1>checked</#if></#if>>
             <input type="radio" name="employee-sex" value="0" title="女" <#if employee??><#if employee.sex == 0>checked</#if></#if>>
         </div>
     </div>
@@ -178,7 +178,7 @@
                         var index = parent.layer.getFrameIndex(window.name);
                         parent.layer.close(index);
                         //刷新父页面，将添加的新数据展示
-                        parent.location.reload();
+                        // parent.location.reload();
                     } else {
                         parent.layer.msg('添加用户失败', {icon: 2});
                     }
@@ -187,6 +187,31 @@
             return false;
         });
     });
+
+    $("#employee-phone").blur(function (){
+        var regPhone = /^((1[3,5,8,7,9][0-9])|(14[5,7])|(17[0,6,7,8])|(19[7]))\d{8}$/;
+        if (!regPhone.test($("#employee-phone").val().trim())){
+            $("#employee-phone").val("")
+            $("#employee-phone").attr("placeholder","请输入正确的手机号");
+        }
+    })
+
+    $("#employee-email").blur(function (){
+        var regEmail = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
+        if (!regEmail.test($("#employee-email").val().trim())){
+            $("#employee-email").val("")
+            $("#employee-email").attr("placeholder","请输入正确的邮箱");
+        }
+    })
+
+    $("#employee-idcard").blur(function (){
+        var regIdcard = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if (!regIdcard.test($("#employee-idcard").val().trim())){
+            $("#employee-idcard").val("")
+            $("#employee-idcard").attr("placeholder","请输入正确的身份证号");
+        }
+    })
+
 </script>
 </body>
 </html>

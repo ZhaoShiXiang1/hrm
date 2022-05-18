@@ -10,6 +10,15 @@ public class EmployeeQuery extends BaseQuery {
 
     private String phone;
 
+    private String idcard;
+
+    public String getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
+    }
 
     public String getName() {
         return name;

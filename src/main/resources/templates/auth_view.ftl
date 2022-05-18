@@ -15,21 +15,21 @@
         <div class="layui-form-item" style="padding-right: 50px">
             <label class="layui-form-label">登录名</label>
             <div class="layui-input-block">
-                <input id="post-username" type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+                <input id="post-username" type="text" name="title" required lay-verify="required" placeholder="请输入登陆名"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item" style="padding-right: 50px">
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-block">
-                <input id="post-name" type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+                <input id="post-name" type="text" name="title" required lay-verify="required" placeholder="请输入姓名"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item" style="padding-right: 50px">
             <label class="layui-form-label">密码</label>
             <div class="layui-input-block">
-                <input id="post-password" type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+                <input id="post-password" type="text" name="title" required lay-verify="required" placeholder="请输入密码"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -179,6 +179,7 @@
                                     }
                                 }
                             })
+                            location.reload();
                         });
                         break;
                 }

@@ -173,6 +173,9 @@
       <if test=" null != phone and '' != phone">
         and phone = #{phone}
       </if>
+      <if test=" null != idcard and '' != idcard">
+        and idcard = #{idcard}
+      </if>
     </where>
   </select>
 

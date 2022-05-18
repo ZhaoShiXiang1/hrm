@@ -84,6 +84,8 @@ public class FileUpLoadController extends BaseController {
         return map;
     }
 
+
+
     //实现文件下载(文件名/数组长度/IO流)
     @RequestMapping("/downloadFile")
     public ResponseEntity<InputStreamResource> downloadFile(Integer id) throws IOException {

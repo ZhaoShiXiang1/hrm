@@ -7,6 +7,27 @@
     <link rel="stylesheet" href="../static/layui/css/layui.css">
 </head>
 <body>
+
+<form class="layui-form">
+    <div class="layui-inline">
+        <div class="layui-input-inline">
+            <input type="text" name="name" class="layui-input searchVal"  placeholder="姓名"/>
+        </div>
+        <div class="layui-input-inline">
+            <input type="text" name="phone" class="layui-input
+							searchVal" placeholder="手机"/>
+        </div>
+        <div class="layui-input-inline">
+            <input type="text" name="idcard" class="layui-input
+							searchVal" placeholder="身份证"/>
+        </div>
+
+        <a class="layui-btn search_btn" id="btnSearch" data-type="reload">
+            <i class="layui-icon">&#xe615;</i> 搜索
+        </a>
+    </div>
+</form>
+
 <table class="layui-hide" id="employee-table" lay-filter="employee-table" style="height: 100%"></table>
 
 <script type="text/html" id="toolbar">
@@ -30,7 +51,7 @@
         layui.use(['table', 'form'], function () {
             var table = layui.table;
             var form = layui.form;
-            table.render({
+            var tableIns =table.render({
                 elem: '#employee-table',
                 url: '/emp/list',
                 toolbar: '#toolbar',
@@ -78,6 +99,21 @@
             });
 
 
+            //这里以搜索为例
+            $("#btnSearch").click(function (){
+                tableIns.reload({
+                    where: { //设定异步数据接口的额外参数，任意设
+                        name:$('[name="name"]').val(),
+                        phone:$('[name="phone"]').val(),
+                        idcard:$('[name="idcard"]').val()
+                    }
+                    ,page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                });
+            });
+
+
             /*右侧工具栏监听*/
             table.on('tool(employee-table)', function (obj) {
                 var data = obj.data; //获得当前行数据
@@ -122,6 +158,7 @@
                                     console.log(res);
                                     if (res.code == 200) {
                                         layer.msg('删除成功', {icon: 1, skin: 'layui-layer-molv', offset: 'c'});
+                                        location.reload();
                                     } else {
                                         layer.msg('删除失败', {icon: 2, skin: 'layui-layer-molv', offset: 'c'});
                                     }
@@ -165,7 +202,11 @@
         });
 
 
+
+
     });
+
+
 
 
 </script>
