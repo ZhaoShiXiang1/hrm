@@ -22,4 +22,6 @@ public interface PositionMapper extends BaseMapper<Position,Integer> {
     Integer deletePosition(Integer id);
     //查询所有
     public List<Position> queryAllPositions(PositionQuery positionQuery);
+    //通过用户名查询数据
+    Position selectPositionByName(String name);
 }

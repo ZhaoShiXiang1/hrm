@@ -114,4 +114,11 @@
   <select id="queryAllPosition" resultType="map">
         select id,name from position;
   </select>
+
+<!--  查询所有职位的名称-->
+  <select id="selectPositionByName" parameterType="String"  resultType="position">
+    select name from position where name = #{name};
+  </select>
+
+
 </mapper>
