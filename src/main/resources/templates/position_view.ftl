@@ -120,6 +120,9 @@
                                                 data:dataBak   // 将新数据重新载入表格
                                             });
                                             layer.msg('新建职位成功', {icon: 1});
+
+                                        }else  if(res.msg=="职位名已存在"){
+                                            layer.msg('职位名已存在', {icon: 2});
                                         } else {
                                             layer.msg('新建职位失败', {icon: 2});
                                         }
