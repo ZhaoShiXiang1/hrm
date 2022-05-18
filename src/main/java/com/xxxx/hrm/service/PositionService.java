@@ -31,7 +31,7 @@ public class PositionService extends BaseService<Position, Integer> {
         AssertUtil.isTrue(StringUtils.isBlank(position.getName()), "添加职位名称不能为空");
         //AssertUtil.isTrue(StringUtils.isBlank(position.getId()),"添加职位名称不能为空");
         AssertUtil.isTrue(StringUtils.isBlank(position.getDescription()), "职位描述不能为空");
-        AssertUtil.isTrue(null != positionMapper.insertPosition(position), "职位名已存在");
+        AssertUtil.isTrue(null != positionMapper.selectPositionByName(position.getName()), "职位名已存在");
         // 校验参数
         checkPositionParams(position.getName(), position.getDescription());
         //设置默认值
@@ -53,7 +53,7 @@ public class PositionService extends BaseService<Position, Integer> {
         //创建键值对
         map.put("code",200);
         map.put("msg","数据查询成功");
-        map.put("count",positionPageInfoPageInfo.getTotal());
+        map.put("size",positionPageInfoPageInfo.getTotal());
         map.put("data",positionPageInfoPageInfo.getList());
         return map;
     }
