@@ -73,7 +73,10 @@
                         //window.location.href = "/user_auth/auth";
                         parent.location.reload();
                         // layer.closeAll("iframe");
-                    } else {
+                    }else if(result.msg =="该角色已存在!"){
+                        parent.layer.msg('该角色已存在!', {icon: 2});
+                    }
+                    else {
                         parent.layer.msg('用户修改失败', {icon: 2});
                     }
                 }
