@@ -50,8 +50,9 @@ public class DepartmentService extends BaseService<Department,Integer> {
     }
 
 
-    //添加文件
+    //添加部门
     public Integer add(Department department){
+        AssertUtil.isTrue(null==department.getName(),"部门为空");
         AssertUtil.isTrue(null!=departmentMapper.queryByName(department.getName()),"部门已存在");
         return  departmentMapper.insertSelective(department);
     }
@@ -62,6 +63,7 @@ public class DepartmentService extends BaseService<Department,Integer> {
         AssertUtil.isTrue(null!=departmentMapper.queryByName(department.getName())&&departmentMapper.queryByName(department.getName()).getId()!=department.getId(),"部门已存在");
         return  departmentMapper.updateByPrimaryKeySelective(department);
     }
+
 
 
     //查询下拉框的部门列表

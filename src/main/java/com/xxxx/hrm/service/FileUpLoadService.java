@@ -14,6 +14,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.File;
@@ -34,6 +35,7 @@ public class FileUpLoadService extends BaseService<FileUpLoad,Integer> {
     private String filePath;
 
     //查询所有文件数据并展示
+    @Transactional
     public Map<Object,Object> selectFilesAll(FileUpLoadQuery query){
         Map<Object,Object> map = new HashMap<>();
         //开启分页
@@ -51,6 +53,7 @@ public class FileUpLoadService extends BaseService<FileUpLoad,Integer> {
     }
 
     //根据id删除文件数据
+    @Transactional
     public Integer deleteFilesById(Integer id){
         //判断id非空
         AssertUtil.isTrue(null==id||null==fileUpLoadService.selectByPrimaryKey(id),"数据库文件信息不存在");
@@ -60,6 +63,7 @@ public class FileUpLoadService extends BaseService<FileUpLoad,Integer> {
     }
 
     //添加文件
+    @Transactional
     public Integer add(FileUpLoad file){
         //非空判断（标题/描述/文件存储路径）
         AssertUtil.isTrue(null==file.getTitle()||null==file.getDescription()||null==file.getPath(),"信息填写不完整，请重新填写");
@@ -68,6 +72,7 @@ public class FileUpLoadService extends BaseService<FileUpLoad,Integer> {
 
 
     //文件夹中文件的上传和更新
+    @Transactional
     public Map<Object,Object> uploadFile(MultipartFile file, Integer rowId) throws IOException {//MultipartFile类实现文件下载
         //删除存储在数据库中的文件
         if (null!=rowId && null!=fileUpLoadService.selectByPrimaryKey(rowId)){
@@ -99,12 +104,14 @@ public class FileUpLoadService extends BaseService<FileUpLoad,Integer> {
     }
 
     //更新文件
+    @Transactional
     public Integer updateByPrimaryKeySelective(FileUpLoad file){
         return  fileUpLoadMapper.updateByPrimaryKeySelective(file);
     }
 
     //实现文件的下载
     //实现文件下载(文件名/数组长度/IO流)
+    @Transactional
     public ResponseEntity<InputStreamResource> downloadFile(Integer id) throws IOException {
         //文件绝对路径
         String filepath = fileUpLoadService.selectByPrimaryKey(id).getPath();
